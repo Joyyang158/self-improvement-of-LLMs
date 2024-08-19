@@ -1,7 +1,11 @@
-1. Dataset:
+### Dataset:
+## Original SPIN
 
-[SPIN-generated-data]
+## GPT-Score Data
+## GPT-preference SPIN
 
 
+### Model
 
-2. Model
+
+### Results
