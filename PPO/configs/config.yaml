@@ -1,0 +1,19 @@
+# Model arguments
+model_name: /group-volume/haoyan/models/zephyr-7b-sft-full #/group-volume/haoyan/models/zephyr-7b-sft-full
+model_revision: ac6e600eefcce74f5e8bae1035d4f66019e93190
+reward_model_name: OpenAssistant/reward-model-deberta-v3-large-v2
+dataset_name: SPIN-generated-data/zephyr-7b-sft-full/iter0_synthetic
+batch_size: 8
+total_epochs: 2
+ppo_epochs: 1
+learning_rate: 5.0e-7
+preprocessing_num_workers: 12
+gradient_accumulation_steps: 1
+log_with: tensorboard
+# num_train_epochs: 3
+output_dir: /group-volume/haoyan/PPO_results/zephyr-7b-sft-full_cosine_lr=5.0e-7_batch_size_8
+max_new_tokens: 256
+logging_dir: ./logging-outputs
+tracker_project_name: PPO-exp-zephyr_cosine_lr=5.0e-7_batch_size_8
+mini_batch_size: 8
+remove_unused_columns: False
