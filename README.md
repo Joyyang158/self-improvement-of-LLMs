@@ -21,13 +21,13 @@ Llama-2-7b-ultrachat200k: https://huggingface.co/datasets/joyfine/SPIN-GPT-prefe
 
 #### zephyr-7b-sft-full
 
-Iter0: 
+Iter0: https://huggingface.co/joyfine/zephyr-7b-sft-full-SPIN-iter0
 
-Iter1:
+Iter1: https://huggingface.co/joyfine/zephyr-7b-sft-full-SPIN-iter1
 
 Iter2: https://huggingface.co/joyfine/zephyr-7b-sft-full-SPIN-iter2
 
-Iter3:
+Iter3: https://huggingface.co/joyfine/zephyr-7b-sft-full-SPIN-iter3
 
 
 
