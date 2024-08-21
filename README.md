@@ -17,6 +17,21 @@ Llama-2-7b-ultrachat200k: https://huggingface.co/datasets/joyfine/SPIN-GPT-prefe
 
 
 ## Model
+### Fine-tuned by SPIN-generated Data
+
+#### zephyr-7b-sft-full
+
+Iter0: 
+
+Iter1:
+
+Iter2: https://huggingface.co/joyfine/zephyr-7b-sft-full-SPIN-iter2
+
+Iter3:
+
+
+
+
 
 
 
