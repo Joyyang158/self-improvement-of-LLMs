@@ -47,8 +47,12 @@
 | SPIN-iter3             | 0.5461            | 0.8329       | 0.3439           | 0.5078           | 0.7151        | 0.1577   | 0.7714        | 0.4511  | 0.5408  |
 
 ### Problems of SPIN
-![My Image](./my-image.png)
-![My Image](./images/my-image.png)
+![My Image](./figures&tables&ppts/SPIN-win-rate-zephyr.png)
+![My Image](./figures&tables&ppts/SPIN-win-rate-Llama.png)
+
+### Potential Methods
+1. 
+
 
 
 
