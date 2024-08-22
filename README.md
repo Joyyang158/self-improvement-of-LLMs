@@ -55,7 +55,7 @@
 
 ## Potential Methods
 
-### 1. Use GPT to label the pair (combine the reward plot)
+### 1. Use GPT to label the pair 
 
 | Task               | arc-challenge(25) | arc-easy(25) | truhfulqa-mc1(0) | truhfulqa-mc2(0) | winogrande(5) | gsm8k(5) | hellaswag(10) | mmlu(5) | Average |
 |--------------------|-------------------|--------------|------------------|------------------|---------------|----------|---------------|---------|---------|
@@ -72,7 +72,9 @@
 | Noised-Zephyr-SPIN-iter1       | 0.5930            | 0.8258       | 0.3035           | 0.4469           | 0.7640        | 0.3275   | 0.8214        | 0.5880  | 0.5838  |
 
 
-## Feture Work - Combind the two ideas, adaptive judge or noise
+## Feture Work - Combine the two ideas (adaptive judge or noise)
+
+related to the reward plot
 
 
 
