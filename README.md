@@ -22,9 +22,8 @@
 ## Files
 `csv_big_spender.py`: 
 
-## Results
 
-### SPIN results
+## SPIN results
 
 ### zephyr-7b-sft-full
 
@@ -46,12 +45,35 @@
 | SPIN-iter2             | 0.5418            | 0.8325       | 0.3476           | 0.5086           | 0.7167        | 0.1592   | 0.7718        | 0.4524  | 0.5413  |
 | SPIN-iter3             | 0.5461            | 0.8329       | 0.3439           | 0.5078           | 0.7151        | 0.1577   | 0.7714        | 0.4511  | 0.5408  |
 
-### Problems of SPIN
+## Problems of SPIN - performance oscillation
+
+### zephyr-7b-sft-full
 ![My Image](./figures&tables&ppts/SPIN-win-rate-zephyr.png)
+
+### Llama-2-7b-ultrachat200k
 ![My Image](./figures&tables&ppts/SPIN-win-rate-Llama.png)
 
-### Potential Methods
-1. 
+## Potential Methods
+
+### 1. Use GPT to label the pair (combine the reward plot)
+
+| Task               | arc-challenge(25) | arc-easy(25) | truhfulqa-mc1(0) | truhfulqa-mc2(0) | winogrande(5) | gsm8k(5) | hellaswag(10) | mmlu(5) | Average |
+|--------------------|-------------------|--------------|------------------|------------------|---------------|----------|---------------|---------|---------|
+| Zephyr-SPIN-iter1         | 0.5853            | 0.8203       | 0.2901           | 0.4341           | 0.7601        | 0.3161   | 0.8172        | 0.5846  | 0.5760  |
+| GPT-Zephyr-SPIN-iter1        | 0.5939            | 0.8270       | 0.3133           | 0.4407           | 0.7672        | 0.3169   | 0.8229        | 0.5855  | 0.5834  |
+
+
+### 2. Add noise
+
+
+| Task               | arc-challenge(25) | arc-easy(25) | truhfulqa-mc1(0) | truhfulqa-mc2(0) | winogrande(5) | gsm8k(5) | hellaswag(10) | mmlu(5) | Average |
+|--------------------|-------------------|--------------|------------------|------------------|---------------|----------|---------------|---------|---------|
+| Zephyr-SPIN-iter1         | 0.5853            | 0.8203       | 0.2901           | 0.4341           | 0.7601        | 0.3161   | 0.8172        | 0.5846  | 0.5760  |
+| Noised-Zephyr-SPIN-iter1       | 0.5930            | 0.8258       | 0.3035           | 0.4469           | 0.7640        | 0.3275   | 0.8214        | 0.5880  | 0.5838  |
+
+
+## Feture Work - Combind the two ideas, adaptive judge or noise
+
 
 
 
