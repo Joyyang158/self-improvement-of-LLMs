@@ -215,3 +215,650 @@ The following values were not passed to `accelerate launch` and had defaults use
 	`--mixed_precision` was set to a value of `'no'`
 	`--dynamo_backend` was set to a value of `'no'`
 To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+2024-08-22:18:42:49,532 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:42:49,533 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:42:49,534 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:42:49,535 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:42:49,544 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:42:49,547 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:42:49,549 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:42:49,552 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:43:12,993 INFO     [__main__.py:383] Selected Tasks: ['truthfulqa_mc1', 'truthfulqa_mc2']
+2024-08-22:18:43:12,997 INFO     [__main__.py:383] Selected Tasks: ['truthfulqa_mc1', 'truthfulqa_mc2']
+2024-08-22:18:43:13,002 INFO     [__main__.py:383] Selected Tasks: ['truthfulqa_mc1', 'truthfulqa_mc2']
+2024-08-22:18:43:13,006 INFO     [__main__.py:383] Selected Tasks: ['truthfulqa_mc1', 'truthfulqa_mc2']
+2024-08-22:18:43:13,018 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:43:13,018 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:43:13,019 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:43:13,019 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:43:13,019 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:43:13,020 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:43:13,020 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:43:13,020 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:43:17,561 WARNING  [other.py:349] Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 304, in hf_raise_for_status
+[rank0]:     response.raise_for_status()
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/requests/models.py", line 1024, in raise_for_status
+[rank0]:     raise HTTPError(http_error_msg, response=self)
+[rank0]: requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json
+
+[rank0]: The above exception was the direct cause of the following exception:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 402, in cached_file
+[rank0]:     resolved_file = hf_hub_download(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+[rank0]:     return f(*args, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1240, in hf_hub_download
+[rank0]:     return _hf_hub_download_to_cache_dir(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1347, in _hf_hub_download_to_cache_dir
+[rank0]:     _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1854, in _raise_on_head_call_error
+[rank0]:     raise head_call_error
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1751, in _get_metadata_or_catch_error
+[rank0]:     metadata = get_hf_file_metadata(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1673, in get_hf_file_metadata
+[rank0]:     r = _request_wrapper(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 376, in _request_wrapper
+[rank0]:     response = _request_wrapper(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 400, in _request_wrapper
+[rank0]:     hf_raise_for_status(response)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 352, in hf_raise_for_status
+[rank0]:     raise RepositoryNotFoundError(message, response) from e
+[rank0]: huggingface_hub.utils._errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-66c7bf06-0a7742da4c1d75ac023a51ec;a423a184-cea6-4d19-8a77-6924eabe9117)
+
+[rank0]: Repository Not Found for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json.
+[rank0]: Please make sure you specified the correct `repo_id` and `repo_type`.
+[rank0]: If you are trying to access a private or gated repo, make sure you are authenticated.
+[rank0]: Invalid username or password.
+
+[rank0]: The above exception was the direct cause of the following exception:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[rank0]:     return _run_code(code, main_globals, None,
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 86, in _run_code
+[rank0]:     exec(code, run_globals)
+[rank0]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 468, in <module>
+[rank0]:     cli_evaluate()
+[rank0]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 389, in cli_evaluate
+[rank0]:     results = evaluator.simple_evaluate(
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/utils.py", line 397, in _wrapper
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/evaluator.py", line 201, in simple_evaluate
+[rank0]:     lm = lm_eval.api.registry.get_model(model).create_from_arg_string(
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/api/model.py", line 147, in create_from_arg_string
+[rank0]:     return cls(**args, **args2)
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 161, in __init__
+[rank0]:     self._get_config(
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 591, in _get_config
+[rank0]:     self._config = transformers.AutoConfig.from_pretrained(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 976, in from_pretrained
+[rank0]:     config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 632, in get_config_dict
+[rank0]:     config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 689, in _get_config_dict
+[rank0]:     resolved_config_file = cached_file(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 425, in cached_file
+[rank0]:     raise EnvironmentError(
+[rank0]: OSError: joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+[rank0]: If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+[rank0]:[W822 18:43:20.488318208 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+W0822 18:43:21.199000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2463579 closing signal SIGTERM
+W0822 18:43:21.200000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2463580 closing signal SIGTERM
+W0822 18:43:21.200000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2463581 closing signal SIGTERM
+E0822 18:43:21.874000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:833] failed (exitcode: 1) local_rank: 0 (pid: 2463578) of binary: /gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/bin/python
+Traceback (most recent call last):
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/bin/accelerate", line 8, in <module>
+    sys.exit(main())
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/accelerate/commands/accelerate_cli.py", line 48, in main
+    args.func(args)
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1097, in launch_command
+    multi_gpu_launcher(args)
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/accelerate/commands/launch.py", line 734, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 133, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+../lm-evaluation-harness/lm_eval FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-08-22_18:43:21
+  host      : a100-4003.cm.cluster
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 2463578)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_processes` was set to a value of `4`
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--num_machines` was set to a value of `1`
+	`--mixed_precision` was set to a value of `'no'`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+2024-08-22:18:43:40,891 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:43:40,892 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:43:40,894 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:43:40,895 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:43:40,903 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:43:40,906 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:43:40,908 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:43:40,911 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:44:04,336 INFO     [__main__.py:383] Selected Tasks: ['winogrande']
+2024-08-22:18:44:04,340 INFO     [__main__.py:383] Selected Tasks: ['winogrande']
+2024-08-22:18:44:04,344 INFO     [__main__.py:383] Selected Tasks: ['winogrande']
+2024-08-22:18:44:04,348 INFO     [__main__.py:383] Selected Tasks: ['winogrande']
+2024-08-22:18:44:04,367 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:44:04,367 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:44:04,368 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:44:04,368 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:44:04,369 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:44:04,369 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:44:04,369 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:44:04,369 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:44:08,661 WARNING  [other.py:349] Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 304, in hf_raise_for_status
+[rank2]:     response.raise_for_status()
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/requests/models.py", line 1024, in raise_for_status
+[rank2]:     raise HTTPError(http_error_msg, response=self)
+[rank2]: requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json
+
+[rank2]: The above exception was the direct cause of the following exception:
+
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 402, in cached_file
+[rank2]:     resolved_file = hf_hub_download(
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+[rank2]:     return f(*args, **kwargs)
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank2]:     return fn(*args, **kwargs)
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1240, in hf_hub_download
+[rank2]:     return _hf_hub_download_to_cache_dir(
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1347, in _hf_hub_download_to_cache_dir
+[rank2]:     _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1854, in _raise_on_head_call_error
+[rank2]:     raise head_call_error
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1751, in _get_metadata_or_catch_error
+[rank2]:     metadata = get_hf_file_metadata(
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank2]:     return fn(*args, **kwargs)
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1673, in get_hf_file_metadata
+[rank2]:     r = _request_wrapper(
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 376, in _request_wrapper
+[rank2]:     response = _request_wrapper(
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 400, in _request_wrapper
+[rank2]:     hf_raise_for_status(response)
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 352, in hf_raise_for_status
+[rank2]:     raise RepositoryNotFoundError(message, response) from e
+[rank2]: huggingface_hub.utils._errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-66c7bf3b-5cb891a17d1a92ce6fc82a40;276499d6-d35f-4497-a3fa-814e3bc6b08c)
+
+[rank2]: Repository Not Found for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json.
+[rank2]: Please make sure you specified the correct `repo_id` and `repo_type`.
+[rank2]: If you are trying to access a private or gated repo, make sure you are authenticated.
+[rank2]: Invalid username or password.
+
+[rank2]: The above exception was the direct cause of the following exception:
+
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[rank2]:     return _run_code(code, main_globals, None,
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 86, in _run_code
+[rank2]:     exec(code, run_globals)
+[rank2]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 468, in <module>
+[rank2]:     cli_evaluate()
+[rank2]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 389, in cli_evaluate
+[rank2]:     results = evaluator.simple_evaluate(
+[rank2]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/utils.py", line 397, in _wrapper
+[rank2]:     return fn(*args, **kwargs)
+[rank2]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/evaluator.py", line 201, in simple_evaluate
+[rank2]:     lm = lm_eval.api.registry.get_model(model).create_from_arg_string(
+[rank2]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/api/model.py", line 147, in create_from_arg_string
+[rank2]:     return cls(**args, **args2)
+[rank2]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 161, in __init__
+[rank2]:     self._get_config(
+[rank2]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 591, in _get_config
+[rank2]:     self._config = transformers.AutoConfig.from_pretrained(
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 976, in from_pretrained
+[rank2]:     config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 632, in get_config_dict
+[rank2]:     config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 689, in _get_config_dict
+[rank2]:     resolved_config_file = cached_file(
+[rank2]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 425, in cached_file
+[rank2]:     raise EnvironmentError(
+[rank2]: OSError: joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+[rank2]: If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 304, in hf_raise_for_status
+[rank0]:     response.raise_for_status()
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/requests/models.py", line 1024, in raise_for_status
+[rank0]:     raise HTTPError(http_error_msg, response=self)
+[rank0]: requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json
+
+[rank0]: The above exception was the direct cause of the following exception:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 402, in cached_file
+[rank0]:     resolved_file = hf_hub_download(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+[rank0]:     return f(*args, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1240, in hf_hub_download
+[rank0]:     return _hf_hub_download_to_cache_dir(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1347, in _hf_hub_download_to_cache_dir
+[rank0]:     _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1854, in _raise_on_head_call_error
+[rank0]:     raise head_call_error
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1751, in _get_metadata_or_catch_error
+[rank0]:     metadata = get_hf_file_metadata(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1673, in get_hf_file_metadata
+[rank0]:     r = _request_wrapper(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 376, in _request_wrapper
+[rank0]:     response = _request_wrapper(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 400, in _request_wrapper
+[rank0]:     hf_raise_for_status(response)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 352, in hf_raise_for_status
+[rank0]:     raise RepositoryNotFoundError(message, response) from e
+[rank0]: huggingface_hub.utils._errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-66c7bf3c-421ac5460df7854470e43158;b2e67a7b-ed95-4e3c-9671-b7776680f51f)
+
+[rank0]: Repository Not Found for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json.
+[rank0]: Please make sure you specified the correct `repo_id` and `repo_type`.
+[rank0]: If you are trying to access a private or gated repo, make sure you are authenticated.
+[rank0]: Invalid username or password.
+
+[rank0]: The above exception was the direct cause of the following exception:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[rank0]:     return _run_code(code, main_globals, None,
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 86, in _run_code
+[rank0]:     exec(code, run_globals)
+[rank0]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 468, in <module>
+[rank0]:     cli_evaluate()
+[rank0]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 389, in cli_evaluate
+[rank0]:     results = evaluator.simple_evaluate(
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/utils.py", line 397, in _wrapper
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/evaluator.py", line 201, in simple_evaluate
+[rank0]:     lm = lm_eval.api.registry.get_model(model).create_from_arg_string(
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/api/model.py", line 147, in create_from_arg_string
+[rank0]:     return cls(**args, **args2)
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 161, in __init__
+[rank0]:     self._get_config(
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 591, in _get_config
+[rank0]:     self._config = transformers.AutoConfig.from_pretrained(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 976, in from_pretrained
+[rank0]:     config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 632, in get_config_dict
+[rank0]:     config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 689, in _get_config_dict
+[rank0]:     resolved_config_file = cached_file(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 425, in cached_file
+[rank0]:     raise EnvironmentError(
+[rank0]: OSError: joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+[rank0]: If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 304, in hf_raise_for_status
+[rank1]:     response.raise_for_status()
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/requests/models.py", line 1024, in raise_for_status
+[rank1]:     raise HTTPError(http_error_msg, response=self)
+[rank1]: requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json
+
+[rank1]: The above exception was the direct cause of the following exception:
+
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 402, in cached_file
+[rank1]:     resolved_file = hf_hub_download(
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+[rank1]:     return f(*args, **kwargs)
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank1]:     return fn(*args, **kwargs)
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1240, in hf_hub_download
+[rank1]:     return _hf_hub_download_to_cache_dir(
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1347, in _hf_hub_download_to_cache_dir
+[rank1]:     _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1854, in _raise_on_head_call_error
+[rank1]:     raise head_call_error
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1751, in _get_metadata_or_catch_error
+[rank1]:     metadata = get_hf_file_metadata(
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank1]:     return fn(*args, **kwargs)
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1673, in get_hf_file_metadata
+[rank1]:     r = _request_wrapper(
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 376, in _request_wrapper
+[rank1]:     response = _request_wrapper(
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 400, in _request_wrapper
+[rank1]:     hf_raise_for_status(response)
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 352, in hf_raise_for_status
+[rank1]:     raise RepositoryNotFoundError(message, response) from e
+[rank1]: huggingface_hub.utils._errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-66c7bf3c-67ee1e41768743e1472ac608;bfd7fe85-d97f-458c-8f31-2ea64a57e5d8)
+
+[rank1]: Repository Not Found for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json.
+[rank1]: Please make sure you specified the correct `repo_id` and `repo_type`.
+[rank1]: If you are trying to access a private or gated repo, make sure you are authenticated.
+[rank1]: Invalid username or password.
+
+[rank1]: The above exception was the direct cause of the following exception:
+
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[rank1]:     return _run_code(code, main_globals, None,
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 86, in _run_code
+[rank1]:     exec(code, run_globals)
+[rank1]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 468, in <module>
+[rank1]:     cli_evaluate()
+[rank1]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 389, in cli_evaluate
+[rank1]:     results = evaluator.simple_evaluate(
+[rank1]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/utils.py", line 397, in _wrapper
+[rank1]:     return fn(*args, **kwargs)
+[rank1]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/evaluator.py", line 201, in simple_evaluate
+[rank1]:     lm = lm_eval.api.registry.get_model(model).create_from_arg_string(
+[rank1]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/api/model.py", line 147, in create_from_arg_string
+[rank1]:     return cls(**args, **args2)
+[rank1]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 161, in __init__
+[rank1]:     self._get_config(
+[rank1]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 591, in _get_config
+[rank1]:     self._config = transformers.AutoConfig.from_pretrained(
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 976, in from_pretrained
+[rank1]:     config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 632, in get_config_dict
+[rank1]:     config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 689, in _get_config_dict
+[rank1]:     resolved_config_file = cached_file(
+[rank1]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 425, in cached_file
+[rank1]:     raise EnvironmentError(
+[rank1]: OSError: joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+[rank1]: If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 304, in hf_raise_for_status
+[rank3]:     response.raise_for_status()
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/requests/models.py", line 1024, in raise_for_status
+[rank3]:     raise HTTPError(http_error_msg, response=self)
+[rank3]: requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json
+
+[rank3]: The above exception was the direct cause of the following exception:
+
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 402, in cached_file
+[rank3]:     resolved_file = hf_hub_download(
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+[rank3]:     return f(*args, **kwargs)
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank3]:     return fn(*args, **kwargs)
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1240, in hf_hub_download
+[rank3]:     return _hf_hub_download_to_cache_dir(
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1347, in _hf_hub_download_to_cache_dir
+[rank3]:     _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1854, in _raise_on_head_call_error
+[rank3]:     raise head_call_error
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1751, in _get_metadata_or_catch_error
+[rank3]:     metadata = get_hf_file_metadata(
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank3]:     return fn(*args, **kwargs)
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1673, in get_hf_file_metadata
+[rank3]:     r = _request_wrapper(
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 376, in _request_wrapper
+[rank3]:     response = _request_wrapper(
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 400, in _request_wrapper
+[rank3]:     hf_raise_for_status(response)
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 352, in hf_raise_for_status
+[rank3]:     raise RepositoryNotFoundError(message, response) from e
+[rank3]: huggingface_hub.utils._errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-66c7bf3c-5d3ef0ed3365ee2d1503c5bd;23be1a07-deea-4d54-8c37-d162ab326afd)
+
+[rank3]: Repository Not Found for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json.
+[rank3]: Please make sure you specified the correct `repo_id` and `repo_type`.
+[rank3]: If you are trying to access a private or gated repo, make sure you are authenticated.
+[rank3]: Invalid username or password.
+
+[rank3]: The above exception was the direct cause of the following exception:
+
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[rank3]:     return _run_code(code, main_globals, None,
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 86, in _run_code
+[rank3]:     exec(code, run_globals)
+[rank3]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 468, in <module>
+[rank3]:     cli_evaluate()
+[rank3]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 389, in cli_evaluate
+[rank3]:     results = evaluator.simple_evaluate(
+[rank3]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/utils.py", line 397, in _wrapper
+[rank3]:     return fn(*args, **kwargs)
+[rank3]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/evaluator.py", line 201, in simple_evaluate
+[rank3]:     lm = lm_eval.api.registry.get_model(model).create_from_arg_string(
+[rank3]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/api/model.py", line 147, in create_from_arg_string
+[rank3]:     return cls(**args, **args2)
+[rank3]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 161, in __init__
+[rank3]:     self._get_config(
+[rank3]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 591, in _get_config
+[rank3]:     self._config = transformers.AutoConfig.from_pretrained(
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 976, in from_pretrained
+[rank3]:     config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 632, in get_config_dict
+[rank3]:     config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 689, in _get_config_dict
+[rank3]:     resolved_config_file = cached_file(
+[rank3]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 425, in cached_file
+[rank3]:     raise EnvironmentError(
+[rank3]: OSError: joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+[rank3]: If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+[rank0]:[W822 18:44:13.654996229 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+W0822 18:44:13.678000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2463643 closing signal SIGTERM
+W0822 18:44:13.678000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2463644 closing signal SIGTERM
+W0822 18:44:13.678000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2463646 closing signal SIGTERM
+E0822 18:44:14.186000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:833] failed (exitcode: 1) local_rank: 2 (pid: 2463645) of binary: /gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/bin/python
+Traceback (most recent call last):
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/bin/accelerate", line 8, in <module>
+    sys.exit(main())
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/accelerate/commands/accelerate_cli.py", line 48, in main
+    args.func(args)
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1097, in launch_command
+    multi_gpu_launcher(args)
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/accelerate/commands/launch.py", line 734, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 133, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+../lm-evaluation-harness/lm_eval FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-08-22_18:44:13
+  host      : a100-4003.cm.cluster
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 2463645)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_processes` was set to a value of `4`
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--num_machines` was set to a value of `1`
+	`--mixed_precision` was set to a value of `'no'`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+2024-08-22:18:44:36,435 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:44:36,436 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:44:36,437 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:44:36,439 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:44:36,447 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:44:36,450 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:44:36,452 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:44:36,455 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:45:00,006 INFO     [__main__.py:383] Selected Tasks: ['gsm8k']
+2024-08-22:18:45:00,010 INFO     [__main__.py:383] Selected Tasks: ['gsm8k']
+2024-08-22:18:45:00,014 INFO     [__main__.py:383] Selected Tasks: ['gsm8k']
+2024-08-22:18:45:00,018 INFO     [__main__.py:383] Selected Tasks: ['gsm8k']
+2024-08-22:18:45:00,028 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:45:00,028 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:45:00,028 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:45:00,028 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:45:00,029 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:45:00,029 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:45:00,030 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:45:00,030 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:45:04,594 WARNING  [other.py:349] Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 304, in hf_raise_for_status
+[rank0]:     response.raise_for_status()
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/requests/models.py", line 1024, in raise_for_status
+[rank0]:     raise HTTPError(http_error_msg, response=self)
+[rank0]: requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json
+
+[rank0]: The above exception was the direct cause of the following exception:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 402, in cached_file
+[rank0]:     resolved_file = hf_hub_download(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+[rank0]:     return f(*args, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1240, in hf_hub_download
+[rank0]:     return _hf_hub_download_to_cache_dir(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1347, in _hf_hub_download_to_cache_dir
+[rank0]:     _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1854, in _raise_on_head_call_error
+[rank0]:     raise head_call_error
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1751, in _get_metadata_or_catch_error
+[rank0]:     metadata = get_hf_file_metadata(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1673, in get_hf_file_metadata
+[rank0]:     r = _request_wrapper(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 376, in _request_wrapper
+[rank0]:     response = _request_wrapper(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 400, in _request_wrapper
+[rank0]:     hf_raise_for_status(response)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 352, in hf_raise_for_status
+[rank0]:     raise RepositoryNotFoundError(message, response) from e
+[rank0]: huggingface_hub.utils._errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-66c7bf70-1b902df868ddf23a1d833e1a;238b5b83-d20e-46b0-aabd-280a735b1404)
+
+[rank0]: Repository Not Found for url: https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0/resolve/main/config.json.
+[rank0]: Please make sure you specified the correct `repo_id` and `repo_type`.
+[rank0]: If you are trying to access a private or gated repo, make sure you are authenticated.
+[rank0]: Invalid username or password.
+
+[rank0]: The above exception was the direct cause of the following exception:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[rank0]:     return _run_code(code, main_globals, None,
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/runpy.py", line 86, in _run_code
+[rank0]:     exec(code, run_globals)
+[rank0]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 468, in <module>
+[rank0]:     cli_evaluate()
+[rank0]:   File "/gpfs/home/hy2847/self-improvement-of-LLMs/../lm-evaluation-harness/lm_eval/__main__.py", line 389, in cli_evaluate
+[rank0]:     results = evaluator.simple_evaluate(
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/utils.py", line 397, in _wrapper
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/evaluator.py", line 201, in simple_evaluate
+[rank0]:     lm = lm_eval.api.registry.get_model(model).create_from_arg_string(
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/api/model.py", line 147, in create_from_arg_string
+[rank0]:     return cls(**args, **args2)
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 161, in __init__
+[rank0]:     self._get_config(
+[rank0]:   File "/gpfs/home/hy2847/lm-evaluation-harness/lm_eval/models/huggingface.py", line 591, in _get_config
+[rank0]:     self._config = transformers.AutoConfig.from_pretrained(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 976, in from_pretrained
+[rank0]:     config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 632, in get_config_dict
+[rank0]:     config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/configuration_utils.py", line 689, in _get_config_dict
+[rank0]:     resolved_config_file = cached_file(
+[rank0]:   File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/transformers/utils/hub.py", line 425, in cached_file
+[rank0]:     raise EnvironmentError(
+[rank0]: OSError: joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0 is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+[rank0]: If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+[rank0]:[W822 18:45:06.461739244 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+W0822 18:45:07.156000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2463820 closing signal SIGTERM
+W0822 18:45:07.156000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2463821 closing signal SIGTERM
+W0822 18:45:07.156000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2463822 closing signal SIGTERM
+E0822 18:45:07.778000 23456247965504 torch/distributed/elastic/multiprocessing/api.py:833] failed (exitcode: 1) local_rank: 0 (pid: 2463819) of binary: /gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/bin/python
+Traceback (most recent call last):
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/bin/accelerate", line 8, in <module>
+    sys.exit(main())
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/accelerate/commands/accelerate_cli.py", line 48, in main
+    args.func(args)
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1097, in launch_command
+    multi_gpu_launcher(args)
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/accelerate/commands/launch.py", line 734, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 133, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/gpfs/data/shenlab/hy2847/miniconda3/envs/evalenv/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+../lm-evaluation-harness/lm_eval FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-08-22_18:45:07
+  host      : a100-4003.cm.cluster
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 2463819)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_processes` was set to a value of `4`
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--num_machines` was set to a value of `1`
+	`--mixed_precision` was set to a value of `'no'`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+2024-08-22:18:45:28,061 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:45:28,063 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:45:28,064 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:45:28,065 INFO     [__main__.py:279] Verbosity set to INFO
+2024-08-22:18:45:28,074 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:45:28,077 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:45:28,079 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:45:28,082 INFO     [__init__.py:491] `group` and `group_alias` keys in tasks' configs will no longer be used in the next release of lm-eval. `tag` will be used to allow to call a collection of tasks just like `group`. `group` will be removed in order to not cause confusion with the new ConfigurableGroup which will be the offical way to create groups with addition of group-wide configuations.
+2024-08-22:18:45:51,847 INFO     [__main__.py:383] Selected Tasks: ['hellaswag']
+2024-08-22:18:45:51,852 INFO     [__main__.py:383] Selected Tasks: ['hellaswag']
+2024-08-22:18:45:51,857 INFO     [__main__.py:383] Selected Tasks: ['hellaswag']
+2024-08-22:18:45:51,862 INFO     [__main__.py:383] Selected Tasks: ['hellaswag']
+2024-08-22:18:45:51,869 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:45:51,869 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:45:51,869 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:45:51,869 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:45:51,870 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:45:51,870 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
+2024-08-22:18:45:51,871 INFO     [evaluator.py:161] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-08-22:18:45:51,871 INFO     [evaluator.py:198] Initializing hf model, with arguments: {'pretrained': 'joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0', 'dtype': 'bfloat16'}
