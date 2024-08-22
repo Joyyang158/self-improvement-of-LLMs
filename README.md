@@ -19,6 +19,11 @@
 [Iter0](https://huggingface.co/joyfine/Llama-2-7b-ultrachat200k-SPIN-iter0), [Iter1](https://huggingface.co/joyfine/Llama-2-7b-ultrachat200k-SPIN-iter1), [Iter2](https://huggingface.co/joyfine/Llama-2-7b-ultrachat200k-SPIN-iter2),
 [Iter3](https://huggingface.co/joyfine/Llama-2-7b-ultrachat200k-SPIN-iter3)
 
+### Fine-tuned by SPIN-GPT-preference Data
+#### zephyr-7b-sft-full
+[Iter0](https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter0), [Iter1](https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter1), [Iter2](https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter2), [Iter3](https://huggingface.co/joyfine/gpt-zephyr-7b-sft-full-SPIN-iter3)
+
+
 ## Files
 `csv_big_spender.py`: 
 
