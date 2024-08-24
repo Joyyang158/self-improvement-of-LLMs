@@ -1,5 +1,5 @@
 # Set which GPU devices to be visible to the process, --num_processes should be adjusted accordingly
-source /home/sgao1/miniconda3/etc/profile.d/conda.sh
+source /home/sgao1/anaconda3/etc/profile.d/conda.sh
 conda activate spinenv
 
 
