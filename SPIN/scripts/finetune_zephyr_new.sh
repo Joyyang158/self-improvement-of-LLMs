@@ -28,4 +28,4 @@ ACCELERATE_LOG_LEVEL=info
 # alignment-handbook/zephyr-7b-sft-full
 
 
-accelerate launch --config_file SPIN/configs/deepspeed_zero3.yaml --num_processes=4 --main_process_port 2950 spin/run_spin.py SPIN/configs/base/zephyr/config_zephyr.yaml --num_train_epochs=3 --output_dir="/blue/yonghui.wu/sgao1/haoyan/spin_results/zephyr-7b-sft-full/outputs/iter0-ckpt"
+accelerate launch --config_file SPIN/configs/deepspeed_zero3.yaml --num_processes=4 --main_process_port 2950 SPIN/spin/run_spin.py SPIN/configs/base/zephyr/config_zephyr.yaml --num_train_epochs=3 --output_dir="/blue/yonghui.wu/sgao1/haoyan/spin_results/zephyr-7b-sft-full/outputs/iter0-ckpt"
