@@ -1,12 +1,12 @@
 # Model arguments
-model_name_or_path: /group-volume/haoyan/models/zephyr-7b-sft-full # /group-volume/haoyan/spin_results/zephyr-7b-sft-full/temp_outputs/iter1-ckpt #/group-volume/haoyan/models/zephyr-7b-sft-full
+model_name_or_path: /blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full # /group-volume/haoyan/spin_results/zephyr-7b-sft-full/temp_outputs/iter1-ckpt #/group-volume/haoyan/models/zephyr-7b-sft-full
 model_revision: ac6e600eefcce74f5e8bae1035d4f66019e93190
 
 # Data training arguments
 dataset_mixer:
   #HuggingFaceH4/ultrafeedback_binarized: 1.0
   # generated/Phi-3-mini-4k-instruct/iter0: 1.0
-  generated/zephyr-7b-sft-full/iter0/synthetic: 1.0
+  /blue/yonghui.wu/sgao1/haoyan/data/SPIN-generated-zephyr-7b-sft-full/iter0: 1.0
   # generated/zephyr-7b-sft-full/iter1/synthetic: 1.0
 dataset_splits:
 - train
