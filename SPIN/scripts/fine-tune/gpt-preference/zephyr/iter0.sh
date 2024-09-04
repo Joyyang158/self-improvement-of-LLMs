@@ -1,9 +1,9 @@
 # Set which GPU devices to be visible to the process, --num_processes should be adjusted accordingly
-source /home/sgao1/anaconda3/etc/profile.d/conda.sh
-conda activate spinenv
+# source /home/sgao1/anaconda3/etc/profile.d/conda.sh
+# conda activate spinenv
 
 
-export CUDA_VISIBLE_DEVICES="0,1,2,3"
+export CUDA_VISIBLE_DEVICES="5,6,7"
 
 
 # Set the home directory for Hugging Face transformers library cache.
@@ -28,4 +28,4 @@ ACCELERATE_LOG_LEVEL=info
 # alignment-handbook/zephyr-7b-sft-full
 
 
-accelerate launch --config_file configs/deepspeed_zero3.yaml --num_processes=4 --main_process_port 2950 spin/run_spin.py configs/config_zephyr_again.yaml --num_train_epochs=3 --output_dir="/group-volume/haoyan/spin_results/zephyr-7b-sft-full/again_outputs/iter0-ckpt"
+nohup accelerate launch --config_file SPIN/configs/deepspeed_zero3.yaml --num_processes=4 --main_process_port 2950 spin/run_spin.py SPIN/configs/gpt-preference/zephyr/iter0.yaml --num_train_epochs=3 --output_dir="/blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/gpt-preference-outputs/iter0" > job_output.log 2>&1 &
