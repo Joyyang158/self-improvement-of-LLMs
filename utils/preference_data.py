@@ -22,11 +22,14 @@ for i in range(len(df_real)):
         data.append({"real": [{"role": "user", "content": str(df_generated['Question'][i])}, {"role": "assistant", "content": str(df_real['R_Answer'][i])}], "generated": [{"role": "user", "content": str(df_generated['Question'][i])}, {"role": "assistant", "content": str(df_generated['G_Answer'][i])}]})
         count_r += 1
         
-print(count_r)
 print(count_g)
+print(count_r)
 
-iter_n = dataset_generated_file_name.replace(".csv","") 
+iter_n = dataset_generated_file_name.replace(".csv","")
 output_dir  = f"{base_path}/gpt-preference-data/{model_name}/{iter_n}"
+
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
 
 
 with open(f'{output_dir}/train.json', 'w') as f:
