@@ -3,7 +3,7 @@ model_name_or_path: /blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full
 model_revision: ac6e600eefcce74f5e8bae1035d4f66019e93190
 
 dataset_mixer:
-  /blue/yonghui.wu/sgao1/haoyan/data/SPIN-generated-zephyr-7b-sft-full/iter0: 1.0
+  /blue/yonghui.wu/sgao1/haoyan/gpt-preference-data/zephyr-7b-sft-full/iter0: 1.0
 dataset_splits:
 - train
 - test
