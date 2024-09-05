@@ -26,7 +26,7 @@ print(count_g)
 print(count_r)
 
 iter_n = dataset_generated_file_name.replace(".csv","")
-output_dir  = f"{base_path}/gpt-preference-data/{model_name}/{iter_n}"
+output_dir  = f"{base_path}/gpt-preference-data-10/{model_name}/{iter_n}"
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
