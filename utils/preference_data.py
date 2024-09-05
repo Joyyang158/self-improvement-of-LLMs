@@ -15,7 +15,7 @@ data = []
 count_r = 0
 count_g = 0
 for i in range(len(df_real)):
-    if df_generated['G_Score'][i] - df_real['R_Score'][i] >= 5:
+    if df_generated['G_Score'][i] - df_real['R_Score'][i] >= 10:
         data.append({"real": [{"role": "user", "content": str(df_generated['Question'][i])}, {"role": "assistant", "content": str(df_generated['G_Answer'][i])}], "generated": [{"role": "user", "content": str(df_generated['Question'][i])}, {"role": "assistant", "content": str(df_real['R_Answer'][i])}]})
         count_g += 1
     else:
