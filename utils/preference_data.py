@@ -15,7 +15,7 @@ data = []
 count_r = 0
 count_g = 0
 for i in range(len(df_real)):
-    if df_generated['G_Score'][i] - df_real['R_Score'][i] >= 10:
+    if df_generated['G_Score'][i] - df_real['R_Score'][i] >= 5:
         data.append({"real": [{"role": "user", "content": str(df_generated['Question'][i])}, {"role": "assistant", "content": str(df_generated['G_Answer'][i])}], "generated": [{"role": "user", "content": str(df_generated['Question'][i])}, {"role": "assistant", "content": str(df_real['R_Answer'][i])}]})
         count_g += 1
     else:
@@ -26,7 +26,7 @@ print(count_g)
 print(count_r)
 
 iter_n = dataset_generated_file_name.replace(".csv","")
-output_dir  = f"{base_path}/gpt-preference-data-10/{model_name}/{iter_n}"
+output_dir  = f"{base_path}/gpt-preference-data-5/{model_name}/{iter_n}"
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
