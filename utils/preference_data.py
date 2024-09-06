@@ -7,7 +7,7 @@ import shutil
 model_name = "zephyr-7b-sft-full"
 base_path = f"/blue/yonghui.wu/sgao1/haoyan"
 dataset_real_file_name = "iter0.csv"
-dataset_generated_file_name = "iter0.csv"
+dataset_generated_file_name = "iter1.csv"
 df_real = pd.read_csv(f"{base_path}/data/gpt-score-{model_name}/{dataset_real_file_name}")
 df_generated = pd.read_csv(f"{base_path}/data/gpt-score-{model_name}/{dataset_generated_file_name}")
 
