@@ -10,7 +10,7 @@ dataset_splits:
 preprocessing_num_workers: 12
 
 # Trainer arguments
-bf16: truels
+bf16: true
 beta: 0.1
 do_eval: false
 evaluation_strategy: "no"
