@@ -7,7 +7,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_name', type=str, default='zephyr-7b-sft-full')
-parser.add_argument('--dataset_real_fiel_name', type=str, default = "iter0.csv")
+parser.add_argument('--dataset_real_file_name', type=str, default = "iter0.csv")
 parser.add_argument('--dataset_generated_file_name', type=str, default = "iter1.csv")
 parser.add_argument('--threshold', type=int, default = 0)
 args = parser.parse_args()
