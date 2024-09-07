@@ -537,10 +537,10 @@ class SPINTrainer(Trainer):
 
 
         # Add the noise at the logits
-        # if model == self.ref_model:
-        #     current_device_index = torch.cuda.current_device()
-        #     gaussian_noise = torch.normal(0, 0.5, all_logits[:len_real].shape).to(f"cuda:{current_device_index}")
-        #     all_logits[:len_real] += gaussian_noise
+        if model == self.ref_model:
+            current_device_index = torch.cuda.current_device()
+            gaussian_noise = torch.normal(0, 0.5, all_logits[:len_real].shape).to(f"cuda:{current_device_index}")
+            all_logits[:len_real] += gaussian_noise
 
 
 
