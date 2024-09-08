@@ -1,9 +1,9 @@
 # Model arguments
-model_name_or_path: joyfine/zephyr-7b-sft-full-SPIN-iter0
+model_name_or_path: joyfine/zephyr-7b-sft-full-SPIN-iter1
 model_revision: main
 
 dataset_mixer:
-  /blue/yonghui.wu/sgao1/haoyan/gpt-preference-data-0/zephyr-7b-sft-full/iter1: 1.0
+  /blue/yonghui.wu/sgao1/haoyan/gpt-preference-data-0/zephyr-7b-sft-full/iter2: 1.0
 dataset_splits:
 - train
 - test
