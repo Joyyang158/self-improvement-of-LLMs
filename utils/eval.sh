@@ -1,4 +1,4 @@
-export CUDA_VISIBLE_DEVICES="0,4,5,6"
+export CUDA_VISIBLE_DEVICES="0,2,6"
 
 # model="/blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/gpt-preference-10-outputs/iter0"
 model="/blue/yonghui.wu/sgao1/haoyan/spin-results/Llama-2-7b-ultrachat200k/noised-gpt-preference-0-outputs/iter3/checkpoint-834"
