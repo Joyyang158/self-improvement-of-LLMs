@@ -58,25 +58,29 @@ loss_fn  = torch.nn.CrossEntropyLoss(ignore_index = tokenizer.pad_token_id, redu
 
 
 def calculate_token_logprob(question, answer):
-    model.eval()
-    tokenized_question = tokenizer(question, return_tensors = 'pt').to("cuda")
-    input_text = question + tokenizer.eos_token + answer
-    tokenized_input = tokenizer(input_text, return_tensors='pt').to("cuda")
+    try:
+        model.eval()
+        tokenized_question = tokenizer(question, return_tensors = 'pt').to("cuda")
+        input_text = question + tokenizer.eos_token + answer
+        tokenized_input = tokenizer(input_text, return_tensors='pt').to("cuda")
 
-    output = model(**tokenized_input)
-    logits = output.logits
+        output = model(**tokenized_input)
+        logits = output.logits
 
-    input_ids = tokenized_input['input_ids']
-    labels = input_ids[..., 1:]
-    shift_logits = logits[..., :-1, :]
-    log_probs = F.log_softmax(shift_logits, dim=-1)
-    target_log_probs = log_probs.gather(dim = -1, index = labels.unsqueeze(-1)).squeeze(-1)
-    final_log_probs = target_log_probs[:, tokenized_question['input_ids'].shape[-1] + 1:]
+        input_ids = tokenized_input['input_ids']
+        labels = input_ids[..., 1:]
+        shift_logits = logits[..., :-1, :]
+        log_probs = F.log_softmax(shift_logits, dim=-1)
+        target_log_probs = log_probs.gather(dim = -1, index = labels.unsqueeze(-1)).squeeze(-1)
+        final_log_probs = target_log_probs[:, tokenized_question['input_ids'].shape[-1] + 1:]
 
-    if final_log_probs.shape[1] != 0:
-        avg_res = np.round((final_log_probs.sum() / final_log_probs.shape[1]).item(),4)
-    else:
-        avg_res = 0
+        if final_log_probs.shape[1] != 0:
+            avg_res = np.round((final_log_probs.sum() / final_log_probs.shape[1]).item(),4)
+        else:
+            avg_res = 0
+    except:
+        print(question)
+        print(answer)
     
     return avg_res
 
