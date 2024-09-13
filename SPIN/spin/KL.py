@@ -76,7 +76,7 @@ def calculate_token_logprob(question, answer):
     final_log_probs = target_log_probs[:, tokenized_question['input_ids'].shape[-1] + 1:]
 
     if final_log_probs.shape[1] != 0:
-        avg_res = np.round((final_log_probs.sum() / final_log_probs.shape[1]).item()[0],4)
+        avg_res = np.round((final_log_probs.sum() / final_log_probs.shape[1]).item(),4)
     else:
         avg_res = 0
     
