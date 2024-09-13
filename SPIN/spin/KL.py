@@ -76,7 +76,7 @@ def calculate_token_logprob(question, answer):
     final_log_probs = target_log_probs[:, tokenized_question['input_ids'].shape[-1] + 1:]
 
     if final_log_probs.shape[1] != 0:
-        avg_res = np.round((final_log_probs.sum() / final_log_probs.shape[1]).item(),4)
+        avg_res = np.round((final_log_probs.sum() / final_log_probs.shape[1]).item()[0],4)
     else:
         avg_res = 0
     
@@ -98,6 +98,7 @@ with accelerator.split_between_processes(df_list) as data:
         avg_generated_res = calculate_token_logprob(question, generated_answer)
         res_dic[index] = [avg_real_res, avg_generated_res]
         log_prob_ls.append(res_dic)
+        print(res_dic)
 results_gathered_log_prob = gather_object(log_prob_ls)
 
 if accelerator.is_local_main_process:
