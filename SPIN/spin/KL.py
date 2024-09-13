@@ -66,6 +66,7 @@ def calculate_token_logprob(question, answer):
     log_probs = F.log_softmax(shift_logits, dim=-1)
     target_log_probs = log_probs.gather(dim = -1, index = labels.unsqueeze(-1)).squeeze(-1)
     final_log_probs = target_log_probs[:, tokenized_question['input_ids'].shape[-1] + 1:]
+    print(final_log_probs)
     if len(final_log_probs) != 0:
         avg_res = np.mean(final_log_probs)
     else:
@@ -82,8 +83,6 @@ with accelerator.split_between_processes(df) as data:
         question = row['Question']
         real_answer = row['R_Answer']
         generated_answer = row['G_Answer']
-        print(question)
-        print(real_answer)
 
         avg_real_res = calculate_token_logprob(question, real_answer)
         avg_generated_res = calculate_token_logprob(question, generated_answer)
