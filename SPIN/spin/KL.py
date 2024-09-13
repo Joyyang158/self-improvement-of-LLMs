@@ -87,24 +87,30 @@ with accelerator.split_between_processes(df_list) as data:
     log_prob_ls = []
     for row in tqdm(data):
         res_dic = {}
-        index = list(row.keys())[0]
+        index = int(list(row.keys())[0])
         question = list(row.values())[0]['Question']
         real_answer = list(row.values())[0]['R_Answer']
         generated_answer = list(row.values())[0]['G_Answer']
 
-        print(index)
-        print(question)
-        print(real_answer)
-
-
         avg_real_res = calculate_token_logprob(question, real_answer)
         avg_generated_res = calculate_token_logprob(question, generated_answer)
         res_dic[index] = [avg_real_res, avg_generated_res]
+        print(res_dic)
         log_prob_ls.append(res_dic)
 results_gathered_log_prob = gather_object(log_prob_ls)
 
 if accelerator.is_local_main_process:
-    print(results_gathered_log_prob)
+    df['R_logprob'] = None
+    df['G_logprob'] = None
+    for item in results_gathered_log_prob:
+        index = list(item.keys())[0]
+        values = list(item.values())
+        df.loc[index, ['R_logprob', 'G_logprob']] = values
+    
+    df.to_csv(f'{args.output_dir}/{args.output_file}', index=False)
+    
+
+
     # if not os.path.exists(args.output_dir):
     #     os.makedirs(args.output_dir)
     # filename = f"{args.output_dir}/log_prob_{args.input_dir.split('/')[-2]}_{args.data_type}.npy"
