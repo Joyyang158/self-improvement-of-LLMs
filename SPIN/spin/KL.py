@@ -50,7 +50,7 @@ df = pd.read_csv(f"{args.input_dir}/{args.input_file}")
 df_list = []
 
 for index, row in df.iterrows():
-    row_dict = {index: {'Question': row['Question'], 'R_answer': row['R_answer'], 'G_answer': row['G_answer']}}
+    row_dict = {index: {'Question': row['Question'], 'R_answer': row['R_Answer'], 'G_answer': row['G_Answer']}}
     df_list.append(row_dict)
 
 
