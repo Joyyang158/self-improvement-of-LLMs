@@ -82,6 +82,8 @@ with accelerator.split_between_processes(df) as data:
         question = row['Question']
         real_answer = row['R_Answer']
         generated_answer = row['G_Answer']
+        print(question)
+        print(real_answer)
 
         avg_real_res = calculate_token_logprob(question, real_answer)
         avg_generated_res = calculate_token_logprob(question, generated_answer)
