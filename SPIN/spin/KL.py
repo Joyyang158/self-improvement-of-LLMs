@@ -24,10 +24,10 @@ accelerator = Accelerator(kwargs_handlers=[kwargs])
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=str, default='joyfine/zephyr-7b-sft-full-SPIN-iter0')
+parser.add_argument('--model', type=str, default='/blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full')
 parser.add_argument('--input_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-zephyr-7b-sft-full')
 parser.add_argument('--input_file', type=str, default='iter0.csv')
-parser.add_argument('--output_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data')
+parser.add_argument('--output_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/final-KL-zephyr-7b-sft-full')
 parser.add_argument('--output_file', type=str, default='iter0.csv')
 # parser.add_argument('--split', type=str, default='test')
 # parser.add_argument('--data_type', type=str, default='real')
