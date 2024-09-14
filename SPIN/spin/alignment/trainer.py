@@ -161,6 +161,8 @@ class SPINTrainer(Trainer):
             )
             model = AutoModelForCausalLM.from_pretrained(model, **model_init_kwargs)
 
+            model.fc_logvar = nn.Linear(4096, 32000)
+
         if isinstance(ref_model, str):
             warnings.warn(
                 "You passed a ref model_id to the SPINTrainer. This will automatically create an "
@@ -234,6 +236,8 @@ class SPINTrainer(Trainer):
         self.is_peft_model = is_peft_available() and isinstance(model, PeftModel)
         self.model_adapter_name = model_adapter_name
         self.ref_adapter_name = ref_adapter_name
+
+        # self.xxx = nn.li
 
         if ref_model:
             self.ref_model = ref_model
@@ -420,6 +424,8 @@ class SPINTrainer(Trainer):
         policy_generated_logps: torch.FloatTensor,
         opponent_real_logps: torch.FloatTensor,
         opponent_generated_logps: torch.FloatTensor,
+        opponent_noised_generated_logps: torch.FloatTensor,
+        exp_var_mean,
         reference_free: bool = False,
     ) -> Tuple[torch.FloatTensor, torch.FloatTensor, torch.FloatTensor]:
         """Compute the SPIN loss for a batch of policy and reference model log probabilities.
@@ -440,11 +446,15 @@ class SPINTrainer(Trainer):
 
         pi_logratios = policy_real_logps - policy_generated_logps
         ref_logratios = opponent_real_logps - opponent_generated_logps
+        ref_noised_logratios = opponent_real_logps.detach() - opponent_noised_generated_logps
 
         if reference_free:
             ref_logratios = 0
+            ref_noised_logratios = 0
 
         logits = pi_logratios - ref_logratios
+        noised_logits = pi_logratios.detach() - ref_noised_logratios
+
 
         ####### Add 2 #########
         # for i in range(policy_real_logps.size(0)):
@@ -452,9 +462,15 @@ class SPINTrainer(Trainer):
         #         logits[i] = ref_logratios[i] - pi_logratios[i]
 
         if self.loss_type == "sigmoid":
-            losses = -F.logsigmoid(self.beta * logits)
+            policy_losses = -F.logsigmoid(self.beta * logits)
+            noise_losses = F.logsigmoid(self.beta * noised_logits)
+            penalty_term = 1 / exp_var_mean
+            losses = policy_losses + noise_losses + penalty_term
         elif self.loss_type == "hinge":
-            losses = torch.relu(1 - self.beta * logits)
+            policy_losses = torch.relu(1 - self.beta * logits)
+            noise_losses = torch.relu(1 - self.beta * noised_logits)
+            penalty_term = 1 / exp_var_mean
+            losses = policy_losses - noise_losses + penalty_term
         else:
             raise ValueError(f"Unknown loss type: {self.loss_type}. Should be one of ['sigmoid', 'hinge']")
         
@@ -467,6 +483,9 @@ class SPINTrainer(Trainer):
         generated_rewards = self.beta * (policy_generated_logps - opponent_generated_logps).detach()
 
         print(f"losses: {losses}")
+        print(f"policy_losses: {policy_losses}")
+        print(f"noise_losses: {noise_losses}")
+        print(f"penalty_term: {penalty_term}")
         print(f"policy_real_logps: {policy_real_logps}")
         print(f"policy_generated_logps: {policy_generated_logps}")
         print(f"opponent_real_logps: {opponent_real_logps}")
@@ -475,7 +494,7 @@ class SPINTrainer(Trainer):
         print(f"real_rewards: {real_rewards}")
         print(f"generated_rewards: {generated_rewards}")
         
-        return losses, real_rewards, generated_rewards
+        return losses, policy_losses, noise_losses, penalty_term, real_rewards, generated_rewards
 
     def _get_batch_logps(
         self,
@@ -529,34 +548,104 @@ class SPINTrainer(Trainer):
             if self.is_encoder_decoder
             else {}
         )
-        all_logits = model(
-            concatenated_batch["concatenated_input_ids"],
-            attention_mask=concatenated_batch["concatenated_attention_mask"],
-            **model_kwargs,
-        ).logits.to(torch.float32)
+
+
+        if model == self.ref_model:
+            with torch.no_grad():
+                outputs = model(
+                    concatenated_batch["concatenated_input_ids"],
+                    attention_mask=concatenated_batch["concatenated_attention_mask"],
+                    **model_kwargs,
+                )
+                model_last_hidden_state = outputs.last_hidden_state.to(torch.float32)
+                all_logits = outputs.logits.to(torch.float32)
+
+            real_logits = all_logits[:len_real].detach()
+            generated_logits = all_logits[len_real:].detach()
+
+            current_device_index = torch.cuda.current_device()
+            gaussian_noise = torch.normal(0, 1, generated_logits.shape).to(f"cuda:{current_device_index}")
+            var = model.fc_logvar(model_last_hidden_state)
+            exp_var = torch.exp(var)
+            
+            sample_noise = gaussian_noise * exp_var
+            noised_generated_logits = generated_logits + sample_noise
+
+            noised_all_logits = torch.cat((real_logits, noised_generated_logits), dim = 0)
+            noised_all_logps = self._get_batch_logps(
+                noised_all_logits,
+                concatenated_batch["concatenated_labels"],
+                average_log_prob=False,
+            )
+
+            noised_generated_logps = noised_all_logps[len_real:]
+            exp_var_mean = exp_var.mean()
+
+            all_logps = self._get_batch_logps(
+                all_logits,
+                concatenated_batch["concatenated_labels"],
+                average_log_prob=False,
+            )
+            real_logps = all_logps[:len_real]
+            generated_logps = all_logps[len_real:]
+
+
+
+            return (real_logps, generated_logps, real_logits, generated_logits, noised_generated_logps, noised_generated_logits, exp_var_mean)
+
+
+
+
+        else:
+            all_logits = model(
+                concatenated_batch["concatenated_input_ids"],
+                attention_mask=concatenated_batch["concatenated_attention_mask"],
+                **model_kwargs,
+            ).logits.to(torch.float32)
+
+
+        
+            real_logits = all_logits[:len_real]
+            generated_logits = all_logits[len_real:]
+
+            all_logps = self._get_batch_logps(
+                all_logits,
+                concatenated_batch["concatenated_labels"],
+                average_log_prob=False,
+            )
+
+            real_logps = all_logps[:len_real]
+            generated_logps = all_logps[len_real:]
+
+            return (real_logps, generated_logps, real_logits, generated_logits)
+
+
+
+
+       
 
 
         # Add the noise at the logits
-        if model == self.ref_model:
-            current_device_index = torch.cuda.current_device()
-            gaussian_noise = torch.normal(0, 0.5, all_logits[:len_real].shape).to(f"cuda:{current_device_index}")
-            all_logits[:len_real] += gaussian_noise
+        # if model == self.ref_model:
+        #     current_device_index = torch.cuda.current_device()
+        #     gaussian_noise = torch.normal(0, 0.5, all_logits[:len_real].shape).to(f"cuda:{current_device_index}")
+        #     all_logits[:len_real] += gaussian_noise
 
 
 
-        all_logps = self._get_batch_logps(
-            all_logits,
-            concatenated_batch["concatenated_labels"],
-            average_log_prob=False,
-        )
+        # all_logps = self._get_batch_logps(
+        #     all_logits,
+        #     concatenated_batch["concatenated_labels"],
+        #     average_log_prob=False,
+        # )
 
-        real_logps = all_logps[:len_real]
-        generated_logps = all_logps[len_real:]
+        # real_logps = all_logps[:len_real]
+        # generated_logps = all_logps[len_real:]
 
-        real_logits = all_logits[:len_real]
-        generated_logits = all_logits[len_real:]
+        # real_logits = all_logits[:len_real]
+        # generated_logits = all_logits[len_real:]
 
-        return (real_logps, generated_logps, real_logits, generated_logits)
+        # return (real_logps, generated_logps, real_logits, generated_logits)
 
 
     @contextmanager
@@ -586,32 +675,41 @@ class SPINTrainer(Trainer):
             policy_real_logits,
             policy_generated_logits,
         ) = self.concatenated_forward(model, batch)
-        with torch.no_grad():
-            if self.ref_model is None:
-                with self.null_ref_context():
-                    (
-                        opponent_real_logps,
-                        opponent_generated_logps,
-                        _,
-                        _,
-                    ) = self.concatenated_forward(self.model, batch)
-            else:
+
+        if self.ref_model is None:
+            with self.null_ref_context():
                 (
                     opponent_real_logps,
                     opponent_generated_logps,
                     _,
                     _,
-                ) = self.concatenated_forward(self.ref_model, batch)
+                ) = self.concatenated_forward(self.model, batch)
+        else:
+            (
+                opponent_real_logps,
+                opponent_generated_logps,
+                _,
+                _,
+                opponent_noised_generated_logps,
+                _,
+                exp_var_mean
 
-        losses, real_rewards, generated_rewards = self.spin_loss(
+            ) = self.concatenated_forward(self.ref_model, batch)
+
+        losses, policy_losses, noise_losses, penalty_term, real_rewards, generated_rewards = self.spin_loss(
             policy_real_logps,
             policy_generated_logps,
             opponent_real_logps,
             opponent_generated_logps,
+            opponent_noised_generated_logps,
+            exp_var_mean
         )
         reward_accuracies = (real_rewards > generated_rewards).float()
 
         prefix = "eval_" if train_eval == "eval" else ""
+        metrics[f"{prefix}policy_losses"] = policy_losses.detach().cpu().mean()
+        metrics[f"{prefix}noise_losses"] = noise_losses.detach().cpu().mean()
+        metrics[f"{prefix}penalty_term"] = penalty_term.detach().cpu().mean()
         metrics[f"{prefix}rewards/real"] = real_rewards.cpu().mean()
         metrics[f"{prefix}rewards/generated"] = generated_rewards.cpu().mean()
         metrics[f"{prefix}rewards/accuracies"] = reward_accuracies.cpu().mean()
