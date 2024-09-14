@@ -14,6 +14,7 @@ import os
 import torch.nn.functional as F
 import random
 import pandas as pd
+import re
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -24,7 +25,8 @@ accelerator = Accelerator(kwargs_handlers=[kwargs])
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=str, default='joyfine/zephyr-7b-sft-full-SPIN-iter0')
+parser.add_argument('--model_self', type=str, default='/blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full')
+parser.add_argument('--model_next', type=str, default='joyfine/zephyr-7b-sft-full-SPIN-iter0')
 parser.add_argument('--input_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-zephyr-7b-sft-full')
 parser.add_argument('--input_file', type=str, default='iter0.csv')
 parser.add_argument('--output_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data')
@@ -33,33 +35,48 @@ parser.add_argument('--output_file', type=str, default='iter0.csv')
 # parser.add_argument('--data_type', type=str, default='real')
 
 args = parser.parse_args()
-model_path = args.model
+model_path_self = args.model_self
+model_path_next = args.model_next
 
-model = AutoModelForCausalLM.from_pretrained(
-    model_path,    
+model_self = AutoModelForCausalLM.from_pretrained(
+    model_path_self ,    
     device_map={"": accelerator.process_index},
     torch_dtype=torch.bfloat16,
     trust_remote_code=True
 )
-tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True, truncation = True, max_length = 4096)  
+model_next = AutoModelForCausalLM.from_pretrained(
+    model_path_next,    
+    device_map={"": accelerator.process_index},
+    torch_dtype=torch.bfloat16,
+    trust_remote_code=True
+)
+tokenizer = AutoTokenizer.from_pretrained(model_path_self, trust_remote_code=True, truncation = True, max_length = 4096)  
 tokenizer.pad_token = tokenizer.eos_token
 
 # data = load_dataset(args.input_dir, split=args.split)
 # generated_data = data[args.data_type]
-df = pd.read_csv(f"{args.input_dir}/{args.input_file}")
-df_list = []
+df_self = pd.read_csv(f"{args.input_dir}/{args.input_file}")
+input_file_next = re.sub(r'\d+', lambda x: str(int(x.group()) + 1), args.input_file)
+df_next = pd.read_csv(f"{args.input_dir}/{input_file_next}")
+df_self_list, df_next_list = [], []
 
-for index, row in df.iterrows():
+for index, row in df_self.iterrows():
     r_answer = '' if pd.isna(row['R_Answer']) else row['R_Answer']
     g_answer = '' if pd.isna(row['G_Answer']) else row['G_Answer']
     row_dict = {index: {'Question': row['Question'], 'R_Answer': r_answer, 'G_Answer': g_answer}}
-    df_list.append(row_dict)
+    df_self_list.append(row_dict)
+
+for index, row in df_next.iterrows():
+    r_answer = '' if pd.isna(row['R_Answer']) else row['R_Answer']
+    g_answer = '' if pd.isna(row['G_Answer']) else row['G_Answer']
+    row_dict = {index: {'Question': row['Question'], 'R_Answer': r_answer, 'G_Answer': g_answer}}
+    df_next_list.append(row_dict)
 
 
 loss_fn  = torch.nn.CrossEntropyLoss(ignore_index = tokenizer.pad_token_id, reduction = "none")
 
 
-def calculate_token_logprob(question, answer):
+def calculate_token_logprob(model, question, answer):
     model.eval()
     tokenized_question = tokenizer(question, return_tensors = 'pt').to("cuda")
     input_text = question + tokenizer.eos_token + answer
@@ -85,28 +102,34 @@ def calculate_token_logprob(question, answer):
 
 
 accelerator.wait_for_everyone()    
-with accelerator.split_between_processes(df_list) as data:
+with accelerator.split_between_processes(df_self_list) as data_self, \
+    accelerator.split_between_processes(df_next_list) as data_next:
     log_prob_ls = []
-    for row in tqdm(data):
+    for row_self, row_next in tqdm(zip(data_self, data_next)):
         res_dic = {}
-        index = int(list(row.keys())[0])
+        index_self = int(list(row_self.keys())[0])
+        index_next = int(list(row_next.keys())[0])
+        print(index_self ==  index_next)
         question = list(row.values())[0]['Question']
         real_answer = list(row.values())[0]['R_Answer']
         generated_answer = list(row.values())[0]['G_Answer']
 
-        avg_real_res = calculate_token_logprob(question, real_answer)
-        avg_generated_res = calculate_token_logprob(question, generated_answer)
-        res_dic[index] = [avg_real_res, avg_generated_res]
+        avg_real_res = calculate_token_logprob(model_self, question, real_answer)
+        avg_generated_res = calculate_token_logprob(model_self, question, generated_answer)
+        avg_SPIN_reward = calculate_token_logprob(model_next, question, generated_answer)
+        res_dic[index] = [avg_real_res, avg_generated_res, avg_SPIN_reward]
         log_prob_ls.append(res_dic)
-        print(res_dic)
 results_gathered_log_prob = gather_object(log_prob_ls)
 
+
+
 if accelerator.is_local_main_process:
-    df['R_logprob'] = None
-    df['G_logprob'] = None
+    df_self['R_logprob'] = None
+    df_self['G_logprob'] = None
+    df_self['G_logprob'] = None
     for item in results_gathered_log_prob:
         index = list(item.keys())[0]
-        values = list(item.values())
+        values = list(item.values())[0]
         df.loc[index, ['R_logprob', 'G_logprob']] = values
     
     df.to_csv(f'{args.output_dir}/{args.output_file}', index=False)
