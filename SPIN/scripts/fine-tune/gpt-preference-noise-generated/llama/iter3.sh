@@ -3,7 +3,7 @@
 # conda activate spinenv
 
 
-export CUDA_VISIBLE_DEVICES="4,5,6"
+export CUDA_VISIBLE_DEVICES="2,3,4"
 
 
 # Set the home directory for Hugging Face transformers library cache.
