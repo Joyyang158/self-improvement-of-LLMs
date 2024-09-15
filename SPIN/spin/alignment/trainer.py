@@ -161,7 +161,7 @@ class SPINTrainer(Trainer):
             )
             model = AutoModelForCausalLM.from_pretrained(model, **model_init_kwargs)
 
-            model.fc_logvar = nn.Linear(4096, 32000)
+            
 
         if isinstance(ref_model, str):
             warnings.warn(
@@ -237,7 +237,6 @@ class SPINTrainer(Trainer):
         self.model_adapter_name = model_adapter_name
         self.ref_adapter_name = ref_adapter_name
 
-        # self.xxx = nn.li
 
         if ref_model:
             self.ref_model = ref_model
@@ -313,6 +312,8 @@ class SPINTrainer(Trainer):
         self.loss_type = loss_type
 
         self._stored_metrics = defaultdict(lambda: defaultdict(list))
+
+        self.model.fc_logvar = nn.Linear(4096, 32000)
 
         super().__init__(
             model=model,
@@ -567,7 +568,7 @@ class SPINTrainer(Trainer):
             current_device_index = torch.cuda.current_device()
             trainable_gaussian_noise = torch.normal(0, 1, generated_logits.shape).to(f"cuda:{current_device_index}")
             no_trainable_gaussian_noise = torch.normal(0, 1, generated_logits.shape).to(f"cuda:{current_device_index}")
-            var = model.fc_logvar(model_last_hidden_state)
+            var = self.model.fc_logvar(model_last_hidden_state)
             exp_var = torch.exp(var)
             
             trainable_sample_noise = trainable_gaussian_noise * exp_var
@@ -627,10 +628,6 @@ class SPINTrainer(Trainer):
 
             return (real_logps, generated_logps, real_logits, generated_logits)
 
-
-
-
-       
 
 
         # Add the noise at the logits
