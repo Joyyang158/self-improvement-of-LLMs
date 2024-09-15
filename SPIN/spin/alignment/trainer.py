@@ -464,7 +464,7 @@ class SPINTrainer(Trainer):
         if self.loss_type == "sigmoid":
             policy_losses = -F.logsigmoid(self.beta * logits)
             noise_losses = F.logsigmoid(self.beta * noised_logits)
-            penalty_term = 1 / exp_var_mean
+            penalty_term = exp_var_mean
             losses = policy_losses + noise_losses + penalty_term
         elif self.loss_type == "hinge":
             policy_losses = torch.relu(1 - self.beta * logits)
@@ -555,45 +555,53 @@ class SPINTrainer(Trainer):
                 outputs = model(
                     concatenated_batch["concatenated_input_ids"],
                     attention_mask=concatenated_batch["concatenated_attention_mask"],
+                    output_hidden_states = True,
                     **model_kwargs,
                 )
-                model_last_hidden_state = outputs.last_hidden_state.to(torch.float32)
+                model_last_hidden_state = outputs.hidden_states[-1].to(torch.float32)
                 all_logits = outputs.logits.to(torch.float32)
 
-            real_logits = all_logits[:len_real].detach()
-            generated_logits = all_logits[len_real:].detach()
+            real_logits = all_logits[:len_real]
+            generated_logits = all_logits[len_real:]
 
             current_device_index = torch.cuda.current_device()
-            gaussian_noise = torch.normal(0, 1, generated_logits.shape).to(f"cuda:{current_device_index}")
+            trainable_gaussian_noise = torch.normal(0, 1, generated_logits.shape).to(f"cuda:{current_device_index}")
+            no_trainable_gaussian_noise = torch.normal(0, 1, generated_logits.shape).to(f"cuda:{current_device_index}")
             var = model.fc_logvar(model_last_hidden_state)
             exp_var = torch.exp(var)
             
-            sample_noise = gaussian_noise * exp_var
-            noised_generated_logits = generated_logits + sample_noise
+            trainable_sample_noise = trainable_gaussian_noise * exp_var
+            no_trainable_sample_noise = no_trainable_gaussian_noise * exp_var.detach()
 
-            noised_all_logits = torch.cat((real_logits, noised_generated_logits), dim = 0)
-            noised_all_logps = self._get_batch_logps(
-                noised_all_logits,
+            trainable_noised_generated_logits = generated_logits + trainable_sample_noise
+            no_trainable_noised_generated_logits = generated_logits + no_trainable_sample_noise
+
+
+            trainable_noised_all_logits = torch.cat((real_logits, trainable_noised_generated_logits), dim = 0)
+            trainable_noised_all_logps = self._get_batch_logps(
+                trainable_noised_all_logits,
                 concatenated_batch["concatenated_labels"],
                 average_log_prob=False,
             )
 
-            noised_generated_logps = noised_all_logps[len_real:]
+            trainable_noised_generated_logps = trainable_noised_all_logps[len_real:]
             exp_var_mean = exp_var.mean()
 
-            all_logps = self._get_batch_logps(
-                all_logits,
+
+
+            no_trainable_noised_all_logits = torch.cat((real_logits, no_trainable_noised_generated_logits), dim = 0)
+
+            no_trainable_all_logps = self._get_batch_logps(
+                no_trainable_noised_all_logits,
                 concatenated_batch["concatenated_labels"],
                 average_log_prob=False,
             )
-            real_logps = all_logps[:len_real]
-            generated_logps = all_logps[len_real:]
+            real_logps = no_trainable_all_logps[:len_real]
+            no_trainable_generated_logps = no_trainable_all_logps[len_real:]
 
 
 
-            return (real_logps, generated_logps, real_logits, generated_logits, noised_generated_logps, noised_generated_logits, exp_var_mean)
-
-
+            return (real_logps, no_trainable_generated_logps, real_logits, generated_logits, trainable_noised_generated_logps, trainable_noised_generated_logits, exp_var_mean)
 
 
         else:
