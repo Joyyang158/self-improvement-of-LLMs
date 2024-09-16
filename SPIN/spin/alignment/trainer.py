@@ -561,7 +561,7 @@ class SPINTrainer(Trainer):
                     output_hidden_states = True,
                     **model_kwargs,
                 )
-                model_last_hidden_state = outputs.hidden_states[-1]
+                model_last_hidden_state = outputs.hidden_states[-1][len_real:]
                 all_logits = outputs.logits.to(torch.float32)
 
             real_logits = all_logits[:len_real]
@@ -572,9 +572,6 @@ class SPINTrainer(Trainer):
             no_trainable_gaussian_noise = torch.normal(0, 1, generated_logits.shape).to(f"cuda:{current_device_index}")
             var = self.model.fc_logvar(model_last_hidden_state)
             exp_var = torch.exp(var)
-
-            print(trainable_gaussian_noise.shape)
-            print(exp_var.shape)
             
             trainable_sample_noise = trainable_gaussian_noise * exp_var
             no_trainable_sample_noise = no_trainable_gaussian_noise * exp_var.detach()
