@@ -161,7 +161,7 @@ class SPINTrainer(Trainer):
             )
             model = AutoModelForCausalLM.from_pretrained(model, **model_init_kwargs)
             model.fc_logvar = nn.Linear(4096, 32000)
-            model.fc_logvar = model.fc_logvar.to(torch.bfloat16)
+            # model.fc_logvar = model.fc_logvar.to(torch.bfloat16)
 
 
 
@@ -561,7 +561,7 @@ class SPINTrainer(Trainer):
                     output_hidden_states = True,
                     **model_kwargs,
                 )
-                model_last_hidden_state = outputs.hidden_states[-1].to(torch.float32)
+                model_last_hidden_state = outputs.hidden_states[-1]
                 all_logits = outputs.logits.to(torch.float32)
 
             real_logits = all_logits[:len_real]
