@@ -160,8 +160,12 @@ class SPINTrainer(Trainer):
                 "`AutoModelForCausalLM` or a `PeftModel` (if you passed a `peft_config`) for you."
             )
             model = AutoModelForCausalLM.from_pretrained(model, **model_init_kwargs)
-            model.fc_logvar = nn.Linear(4096, 32000, bias = False)
-            nn.init.zeros_(model.fc_logvar.weight)
+            model.fc_logvar = nn.Sequential(
+                nn.LayerNorm(4096),
+                nn.GELU(),
+                nn.Linear(4096, 32000, bias = False)
+            )
+            # nn.init.zeros_(model.fc_logvar.weight)
 
             # model.fc_logvar = model.fc_logvar.to(torch.bfloat16)
 
