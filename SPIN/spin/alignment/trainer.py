@@ -161,6 +161,8 @@ class SPINTrainer(Trainer):
             )
             model = AutoModelForCausalLM.from_pretrained(model, **model_init_kwargs)
             model.fc_logvar = nn.Linear(4096, 32000)
+            nn.init.zeros_(model.fc_logvar.weight)
+            nn.init.zeros_(model.fc_logvar.bias)
             # model.fc_logvar = model.fc_logvar.to(torch.bfloat16)
 
 
