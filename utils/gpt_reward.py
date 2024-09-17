@@ -49,7 +49,7 @@ file_path = f'/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-zephy
 if not os.path.exists(file_path):
     os.makedirs(file_path)
 
-csv_file = f'{file_path}/{data_file_path.split("/")[-1]}.csv'
+csv_file = f'{file_path}/{data_file_path.split("/")[-2]}.csv'
 print(csv_file)
 
 # if file_path.split("/")[1] == "iter0_synthetic":
@@ -64,7 +64,7 @@ file_exists = os.path.isfile(csv_file)
 
 
 save_batch_size = 500
-if data_file_path.split("/")[-1] == "iter0":
+if data_file_path.split("/")[-2] == "iter0":
     count = 0
     total_data = []
     for each_sample in tqdm(data):
