@@ -1,4 +1,4 @@
-export CUDA_VISIBLE_DEVICES=0,1,2
+export CUDA_VISIBLE_DEVICES=1,2,3,5,6
 
 FRAC_LEN=800
 TOTAL_RECORDS=20000
@@ -7,8 +7,8 @@ NUM_BATCHES=$((TOTAL_RECORDS / FRAC_LEN))
 
 for ((DATA_FRAC=0; DATA_FRAC < NUM_BATCHES; DATA_FRAC++))
 do   
-    echo "Processing batch $DATA_FRAC of $NUM_BATCHEs..."
-    accelerate launch --num_processes 3 --main_process_port=2950 spin/generate.py --model "/group-volume/haoyan/sft_results/zephyr-7b-sft-full/final" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir generated/zephyr-7b-sft-full-again/iter0/train-raw-generated
+    echo "Train Data -- Processing batch $DATA_FRAC of $NUM_BATCHEs..."
+    nohup accelerate launch --num_processes 5 --main_process_port=2950 spin/generate.py --model "/blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/trainable-noised-gpt-preference-0-outputs/iter1" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir /blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter1/train-raw-generated > job_generate_trainable-noise_iter1.log 2>&1 &
 
 done
 echo "Train - All batches processed"
@@ -17,8 +17,8 @@ echo "Train - All batches processed"
 
 for ((DATA_FRAC=0; DATA_FRAC < NUM_BATCHES; DATA_FRAC++))
 do 
-    echo "Processing batch $DATA_FRAC of $NUM_BATCHEs..."
-    accelerate launch --num_processes 3 --main_process_port=2950 spin/generate.py --model "/group-volume/haoyan/sft_results/zephyr-7b-sft-full/final" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --split test --output_dir generated/zephyr-7b-sft-full-again/iter0/test-raw-generated
+    echo "Test Data -- Processing batch $DATA_FRAC of $NUM_BATCHEs..."
+    nohup accelerate launch --num_processes 5 --main_process_port=2950 spin/generate.py --model "/blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/trainable-noised-gpt-preference-0-outputs/iter1" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --split test --output_dir /blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter1/test-raw-generated job_generate_trainable-noise_iter1.log 2>&1 &
 
 done
 echo "Test - All batches processed"
