@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 base_path = f"/blue/yonghui.wu/sgao1/haoyan"
 df_real = pd.read_csv(f"{base_path}/data/gpt-score-{args.model_name}/{args.dataset_real_file_name}")
-df_generated = pd.read_csv(f"{base_path}/data/gpt-score-{args.model_name}/{args.dataset_generated_file_name}")
+df_generated = pd.read_csv(f"{base_path}/data/gpt-score-trainable-noise-{args.model_name}/{args.dataset_generated_file_name}")
 
 data = []
 count_r = 0
@@ -32,7 +32,7 @@ print(count_g)
 print(count_r)
 
 iter_n = args.dataset_generated_file_name.replace(".csv","")
-output_dir  = f"{base_path}/gpt-preference-data-{args.threshold}/{args.model_name}/{iter_n}"
+output_dir  = f"{base_path}/gpt-preference-data-{args.threshold}/{args.model_name}/trainable-noise/{iter_n}"
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
@@ -41,7 +41,7 @@ if not os.path.exists(output_dir):
 with open(f'{output_dir}/train.json', 'w') as f:
     json.dump(data, f, indent=4)
 
-src_path = f"{base_path}/data/SPIN-generated-{args.model_name}/{iter_n}/test.json"
+src_path = f"{base_path}/data/trainable-noise-{args.model_name}/{iter_n}/test.json"
 dst_path = f"{output_dir}/test.json"
 shutil.copy(src_path, dst_path)
 
