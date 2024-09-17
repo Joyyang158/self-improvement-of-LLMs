@@ -16,8 +16,8 @@ num_fracs = args.num_fracs
 input_dir = args.input_dir
 output_dir = args.output_dir
 
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
+# if not os.path.exists(output_dir):
+#     os.makedirs(output_dir)
 
 data = []
 for i in range(num_fracs):
@@ -57,5 +57,5 @@ dataset_test = load_dataset('json', data_files=f'{input_dir}/synthetic/synthetic
 print(len(dataset))
 print(len(dataset_test))
 
-pq.write_table(dataset.data.table, f'{output_dir}/train_prefs-00000-of-00001.parquet')
-pq.write_table(dataset_test.data.table, f'{output_dir}/test_prefs-00000-of-00001.parquet')
+# pq.write_table(dataset.data.table, f'{output_dir}/train_prefs-00000-of-00001.parquet')
+# pq.write_table(dataset_test.data.table, f'{output_dir}/test_prefs-00000-of-00001.parquet')
