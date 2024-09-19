@@ -98,8 +98,7 @@ else:
         while retries < 3:
             try:
                 g_score = gpt_inference(prompt.format(question = question, answer = generated_answer), model)
-            except:
-                openai.error.Timeout
+            except openai.error.Timeout:
                 retries += 1
                 print(f"Timeout, retrying {retries}/{3}...")
                 time.sleep(1) 
