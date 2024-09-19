@@ -3,6 +3,7 @@ import os
 from datasets import load_dataset
 import pyarrow.parquet as pq
 import random
+import shutil
 random.seed(42)
 
 import argparse
@@ -54,8 +55,21 @@ with open(f'{input_dir}/test.json', 'w') as f:
 dataset = load_dataset('json', data_files=f'{input_dir}/train.json',split='train')
 dataset_test = load_dataset('json', data_files=f'{input_dir}/test.json',split='train')
 
+
+
 print(len(dataset))
 print(len(dataset_test))
+
+
+target_folder = 'f{input_dir}/generated_data'
+if not os.path.exists(target_folder):
+    os.makedirs(target_folder)
+
+folder1 = 'f{input_dir}/generated_data'
+folder2 = 'f{input_dir}/generated_data'
+
+shutil.move(folder1, target_folder)
+shutil.move(folder2, target_folder)
 
 # pq.write_table(dataset.data.table, f'{output_dir}/train_prefs-00000-of-00001.parquet')
 # pq.write_table(dataset_test.data.table, f'{output_dir}/test_prefs-00000-of-00001.parquet')

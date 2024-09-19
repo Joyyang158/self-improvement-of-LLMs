@@ -8,7 +8,7 @@ from tqdm import tqdm
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter1/train.json')
+parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter3/train.json')
 args = parser.parse_args()
 
 
