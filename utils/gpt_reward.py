@@ -6,6 +6,8 @@ import random
 from tqdm import tqdm
 # from together import Together
 import argparse
+import openai
+import time
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter3/train.json')
@@ -21,7 +23,9 @@ def gpt_inference(prompt, model):
         messages = [
             {'role': 'system', 'content': ''},
             {'role': 'user', 'content': prompt}
-        ]
+        ],
+        timeout=10
+
     )
     output = response.choices[0].message.content
     return output
@@ -85,12 +89,20 @@ if data_file_path.split("/")[-2] == "iter0":
             print("---------------Save Complete--------------")
 else:
     count = 0
+    retries = 0
     total_data = []
     for each_sample in tqdm(data):
         question = each_sample['real'][0]['content']
         sft_answer = each_sample['real'][1]['content']
         generated_answer = each_sample['generated'][1]['content']
-        g_score = gpt_inference(prompt.format(question = question, answer = generated_answer), model)
+        while retries < 3:
+            try:
+                g_score = gpt_inference(prompt.format(question = question, answer = generated_answer), model)
+            except:
+                openai.error.Timeout
+                retries += 1
+                print(f"Timeout, retrying {retries}/{3}...")
+                time.sleep(1) 
         new_row = {"Question": question, "G_Answer":generated_answer, "G_Score":g_score}
         total_data.append(new_row)
         count += 1
