@@ -95,13 +95,7 @@ else:
         question = each_sample['real'][0]['content']
         sft_answer = each_sample['real'][1]['content']
         generated_answer = each_sample['generated'][1]['content']
-        while retries < 3:
-            try:
-                g_score = gpt_inference(prompt.format(question = question, answer = generated_answer), model)
-            except openai.error.Timeout:
-                retries += 1
-                print(f"Timeout, retrying {retries}/{3}...")
-                time.sleep(1) 
+        g_score = gpt_inference(prompt.format(question = question, answer = generated_answer), model)
         new_row = {"Question": question, "G_Answer":generated_answer, "G_Score":g_score}
         total_data.append(new_row)
         count += 1
