@@ -577,7 +577,7 @@ class SPINTrainer(Trainer):
             trainable_gaussian_noise = torch.normal(0, 1, generated_logits.shape).to(f"cuda:{current_device_index}")
             no_trainable_gaussian_noise = torch.normal(0, 1, generated_logits.shape).to(f"cuda:{current_device_index}")
             var = self.model.fc_logvar(model_last_hidden_state).to(torch.float32)
-            exp_var = 0.75 * torch.exp(var)
+            exp_var = torch.exp(var)
             
             trainable_sample_noise = trainable_gaussian_noise * exp_var
             no_trainable_sample_noise = no_trainable_gaussian_noise * exp_var.detach()
