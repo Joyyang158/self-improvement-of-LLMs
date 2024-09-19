@@ -65,8 +65,8 @@ target_folder = 'f{input_dir}/generated_data'
 if not os.path.exists(target_folder):
     os.makedirs(target_folder)
 
-folder1 = 'f{input_dir}/generated_data'
-folder2 = 'f{input_dir}/generated_data'
+folder1 = 'f{input_dir}/test-raw-generated'
+folder2 = 'f{input_dir}/train-raw-generated'
 
 shutil.move(folder1, target_folder)
 shutil.move(folder2, target_folder)
