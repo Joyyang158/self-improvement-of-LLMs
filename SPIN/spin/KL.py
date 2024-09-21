@@ -62,7 +62,7 @@ else:
     df = pd.read_csv(f"{args.input_dir}/{args.base_input_file}")
     df['R_Answer'] = df_iter0['R_Answer']
 
-df_spin = pd.read_csv(f"{args.spin_input_file}/{args.spin_input_file}")
+df_spin = pd.read_csv(f"{args.input_dir}/{args.spin_input_file}")
 
 df_list = []
 
