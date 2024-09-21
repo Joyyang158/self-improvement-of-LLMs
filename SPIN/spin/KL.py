@@ -35,15 +35,22 @@ parser.add_argument('--output_file', type=str, default='iter0.csv')
 # parser.add_argument('--data_type', type=str, default='real')
 
 args = parser.parse_args()
-model_path = args.model
 
 model = AutoModelForCausalLM.from_pretrained(
-    model_path,    
+    args.base_model,    
     device_map={"": accelerator.process_index},
     torch_dtype=torch.bfloat16,
     trust_remote_code=True
 )
-tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True, truncation = True, max_length = 4096)  
+
+spin_model = AutoModelForCausalLM.from_pretrained(
+    args.spin_model,
+    device_map={"": accelerator.process_index},
+    torch_dtype=torch.bfloat16,
+    trust_remote_code=True
+)
+
+tokenizer = AutoTokenizer.from_pretrained(args.base_model, trust_remote_code=True, truncation = True, max_length = 4096)  
 tokenizer.pad_token = tokenizer.eos_token
 
 # data = load_dataset(args.input_dir, split=args.split)
@@ -72,7 +79,7 @@ for index, row in df.iterrows():
 loss_fn  = torch.nn.CrossEntropyLoss(ignore_index = tokenizer.pad_token_id, reduction = "none")
 
 
-def calculate_token_logprob(question, answer):
+def calculate_token_logprob(model, question, answer):
     model.eval()
     tokenized_question = tokenizer(question, return_tensors = 'pt').to("cuda")
     input_text = question + tokenizer.eos_token + answer
@@ -108,9 +115,9 @@ with accelerator.split_between_processes(df_list) as data:
         generated_answer = list(row.values())[0]['G_Answer']
         spin_answer = list(row.values())[0]['SPIN_Answer']
 
-        avg_real_res = calculate_token_logprob(question, real_answer)
-        avg_generated_res = calculate_token_logprob(question, generated_answer)
-        avg_spin_res = calculate_token_logprob(question, spin_answer)
+        avg_real_res = calculate_token_logprob(model, question, real_answer)
+        avg_generated_res = calculate_token_logprob(model, question, generated_answer)
+        avg_spin_res = calculate_token_logprob(spin_model, question, spin_answer)
         res_dic[index] = [avg_real_res, avg_generated_res, avg_spin_res]
         log_prob_ls.append(res_dic)
 results_gathered_log_prob = gather_object(log_prob_ls)
