@@ -1,8 +1,8 @@
-export CUDA_VISIBLE_DEVICES=0,1,2,3,5,6
+export CUDA_VISIBLE_DEVICES=3,4,5
 
 # source /home/user/miniconda3/etc/profile.d/conda.sh
 # conda activate evalenv
-accelerate launch --num_processes 6 --main_process_port=2950 SPIN/spin/KL.py
+accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py
 
 
 #### zephyr ####

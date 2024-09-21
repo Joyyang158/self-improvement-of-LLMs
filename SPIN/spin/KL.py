@@ -24,9 +24,11 @@ accelerator = Accelerator(kwargs_handlers=[kwargs])
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=str, default='/blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full')
+parser.add_argument('--base_model', type=str, default='/blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full')
+parser.add_argument('--spin_model', type=str, default='joyfine/zephyr-7b-sft-full-SPIN-iter0')
 parser.add_argument('--input_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-zephyr-7b-sft-full')
-parser.add_argument('--input_file', type=str, default='iter0.csv')
+parser.add_argument('--base_input_file', type=str, default='iter0.csv')
+parser.add_argument('--spin_input_file', type=str, default='iter1.csv')
 parser.add_argument('--output_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/final-KL-zephyr-7b-sft-full')
 parser.add_argument('--output_file', type=str, default='iter0.csv')
 # parser.add_argument('--split', type=str, default='test')
@@ -46,19 +48,25 @@ tokenizer.pad_token = tokenizer.eos_token
 
 # data = load_dataset(args.input_dir, split=args.split)
 # generated_data = data[args.data_type]
-if args.input_file == 'iter0.csv':
-    df = pd.read_csv(f"{args.input_dir}/{args.input_file}")
+if args.base_input_file == 'iter0.csv':
+    df = pd.read_csv(f"{args.input_dir}/{args.base_input_file}")
 else:
     df_iter0 = pd.read_csv(f"{args.input_dir}/iter0.csv")
-    df = pd.read_csv(f"{args.input_dir}/{args.input_file}")
+    df = pd.read_csv(f"{args.input_dir}/{args.base_input_file}")
     df['R_Answer'] = df_iter0['R_Answer']
+
+df_spin = pd.read_csv(f"{args.spin_input_file}/{args.spin_input_file}")
+
 df_list = []
 
 for index, row in df.iterrows():
     r_answer = '' if pd.isna(row['R_Answer']) else row['R_Answer']
     g_answer = '' if pd.isna(row['G_Answer']) else row['G_Answer']
-    row_dict = {index: {'Question': row['Question'], 'R_Answer': r_answer, 'G_Answer': g_answer}}
+    spin_answer = '' if pd.isna(df_spin.iloc[index]['G_Answer']) else df_spin.iloc[index]['G_Answer']
+    row_dict = {index: {'Question': row['Question'], 'R_Answer': r_answer, 'G_Answer': g_answer, "SPIN_Answer": spin_answer}}
     df_list.append(row_dict)
+
+
 
 
 loss_fn  = torch.nn.CrossEntropyLoss(ignore_index = tokenizer.pad_token_id, reduction = "none")
@@ -98,20 +106,23 @@ with accelerator.split_between_processes(df_list) as data:
         question = list(row.values())[0]['Question']
         real_answer = list(row.values())[0]['R_Answer']
         generated_answer = list(row.values())[0]['G_Answer']
+        spin_answer = list(row.values())[0]['SPIN_Answer']
 
         avg_real_res = calculate_token_logprob(question, real_answer)
         avg_generated_res = calculate_token_logprob(question, generated_answer)
-        res_dic[index] = [avg_real_res, avg_generated_res]
+        avg_spin_res = calculate_token_logprob(question, spin_answer)
+        res_dic[index] = [avg_real_res, avg_generated_res, avg_spin_res]
         log_prob_ls.append(res_dic)
 results_gathered_log_prob = gather_object(log_prob_ls)
 
 if accelerator.is_local_main_process:
     df['R_logprob'] = None
     df['G_logprob'] = None
+    df['SPIN_logprob'] = None
     for item in results_gathered_log_prob:
         index = list(item.keys())[0]
         values = list(item.values())[0]
-        df.loc[index, ['R_logprob', 'G_logprob']] = values
+        df.loc[index, ['R_logprob', 'G_logprob', 'SPIN_logprob']] = values
     
     df.to_csv(f'{args.output_dir}/{args.output_file}', index=False)
     
