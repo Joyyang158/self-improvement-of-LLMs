@@ -8,8 +8,8 @@ args = parser.parse_args()
 
 spin_file_path = "/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-zephyr-7b-sft-full"
 noise_file_path = "/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-zephyr-7b-sft-full"
-spin_data = pd.read_csv(f"{spin_file_path}/{args.iteration}")
-noise_data = pd.read_csv(f"{noise_file_path}/{args.iteration}")
+spin_data = pd.read_csv(f"{spin_file_path}/{args.iteration}.csv")
+noise_data = pd.read_csv(f"{noise_file_path}/{args.iteration}.csv")
 win_count, tie_count, lose_count = 0, 0 ,0
 
 
