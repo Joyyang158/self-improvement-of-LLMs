@@ -31,44 +31,44 @@ for i in range(num_fracs):
         data.append(result)
 
 print(len(data))
-test_data = []
+# test_data = []
 
-for i in range(num_fracs):
-    with open(f'{input_dir}/test-raw-generated/loser_{i}_test.jsonl', 'r') as f:
-        json_list = list(f)
+# for i in range(num_fracs):
+#     with open(f'{input_dir}/test-raw-generated/loser_{i}_test.jsonl', 'r') as f:
+#         json_list = list(f)
 
-    for json_str in json_list:
-        result = json.loads(json_str)
-        result['generated'][1]['content'] = result['generated'][1]['content'].lstrip()
-        test_data.append(result)
+#     for json_str in json_list:
+#         result = json.loads(json_str)
+#         result['generated'][1]['content'] = result['generated'][1]['content'].lstrip()
+#         test_data.append(result)
 
-print(len(test_data))
+# print(len(test_data))
 
 # if not os.path.exists(f'{input_dir}/synthetic'):
 #     os.makedirs(f'{input_dir}/synthetic')
 
 with open(f'{input_dir}/train.json', 'w') as f:
     json.dump(data, f, indent=4)
-with open(f'{input_dir}/test.json', 'w') as f:
-    json.dump(test_data, f, indent=4)
+# with open(f'{input_dir}/test.json', 'w') as f:
+#     json.dump(test_data, f, indent=4)
 
 dataset = load_dataset('json', data_files=f'{input_dir}/train.json',split='train')
-dataset_test = load_dataset('json', data_files=f'{input_dir}/test.json',split='train')
+# dataset_test = load_dataset('json', data_files=f'{input_dir}/test.json',split='train')
 
 
 
 print(len(dataset))
-print(len(dataset_test))
+# print(len(dataset_test))
 
 
 target_folder = f'{input_dir}/generated_data'
 if not os.path.exists(target_folder):
     os.makedirs(target_folder)
 
-folder1 = f'{input_dir}/test-raw-generated'
+# folder1 = f'{input_dir}/test-raw-generated'
 folder2 = f'{input_dir}/train-raw-generated'
 
-shutil.move(folder1, target_folder)
+# shutil.move(folder1, target_folder)
 shutil.move(folder2, target_folder)
 
 # pq.write_table(dataset.data.table, f'{output_dir}/train_prefs-00000-of-00001.parquet')
