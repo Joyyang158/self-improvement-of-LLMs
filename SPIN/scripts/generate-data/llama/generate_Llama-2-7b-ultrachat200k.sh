@@ -8,7 +8,7 @@ NUM_BATCHES=$((TOTAL_RECORDS / FRAC_LEN))
 for ((DATA_FRAC=0; DATA_FRAC < NUM_BATCHES; DATA_FRAC++))
 do   
     echo "Processing batch $DATA_FRAC of $NUM_BATCHEs..."
-    accelerate launch --num_processes 3 --main_process_port=2950 spin/generate.py --model "joyfine/Llama-2-7b-ultrachat200k-SPIN-iter3" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir /blue/yonghui.wu/sgao1/haoyan/data/base-Llama-2-7b-ultrachat200k/iter4/train-raw-generated
+    accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/generate.py --model "joyfine/Llama-2-7b-ultrachat200k-SPIN-iter3" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir /blue/yonghui.wu/sgao1/haoyan/data/base-Llama-2-7b-ultrachat200k/iter4/train-raw-generated
 
 done
 echo "Train - All batches processed"
