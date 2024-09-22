@@ -11,6 +11,8 @@ import time
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter3/train.json')
+parser.add_argument('--file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-zephyr-7b-sft-full')
+
 args = parser.parse_args()
 
 
@@ -49,7 +51,7 @@ with open(data_file_path, 'r') as file:
 # random.seed(42)
 # sample_data = random.sample(data, 2000)
 
-file_path = f'/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-zephyr-7b-sft-full'
+file_path = args.file_path
 if not os.path.exists(file_path):
     os.makedirs(file_path)
 
