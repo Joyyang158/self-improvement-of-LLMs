@@ -1,15 +1,15 @@
-export CUDA_VISIBLE_DEVICES=2,3,4,5
+export CUDA_VISIBLE_DEVICES=1,2,3,4,6
 
 FRAC_LEN=800
 TOTAL_RECORDS=20000
 
-# NUM_BATCHES=$((TOTAL_RECORDS / FRAC_LEN))
-NUM_BATCHES=21
+NUM_BATCHES=$((TOTAL_RECORDS / FRAC_LEN))
+# NUM_BATCHES=21
 
-for ((DATA_FRAC=20; DATA_FRAC < NUM_BATCHES; DATA_FRAC++))
+for ((DATA_FRAC=0; DATA_FRAC < NUM_BATCHES; DATA_FRAC++))
 do   
     echo "Train Data -- Processing batch $DATA_FRAC of $NUM_BATCHEs..."
-    accelerate launch --num_processes 4 --main_process_port=2950 SPIN/spin/generate.py --model "/blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/self-trainable-noise-gpt-preference-0-outputs/iter2" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir /blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter3/train-raw-generated
+    accelerate launch --num_processes 5 --main_process_port=2950 SPIN/spin/generate.py --model "/blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/self-trainable-noise-gpt-preference-0-outputs/iter2-new/checkpoint-1667" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir /blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter2-new/train-raw-generated
 
 done
 echo "Train - All batches processed"
