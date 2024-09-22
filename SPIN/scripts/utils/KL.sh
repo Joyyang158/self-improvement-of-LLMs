@@ -2,8 +2,8 @@ export CUDA_VISIBLE_DEVICES=3,4,5
 
 # source /home/user/miniconda3/etc/profile.d/conda.sh
 # conda activate evalenv
-accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py
-accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py --base_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter0 --spin_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter1 --base_input_file iter1.csv --spin_input_file iter2.csv --output_file iter1.csv
+# accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py
+# accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py --base_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter0 --spin_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter1 --base_input_file iter1.csv --spin_input_file iter2.csv --output_file iter1.csv
 accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py --base_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter1 --spin_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter2 --base_input_file iter2.csv --spin_input_file iter3.csv --output_file iter2.csv
 
 #### zephyr ####
