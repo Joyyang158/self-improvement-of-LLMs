@@ -1,4 +1,4 @@
-export CUDA_VISIBLE_DEVICES=0,1,2
+export CUDA_VISIBLE_DEVICES=1,2,3,5,7
 
 FRAC_LEN=800
 TOTAL_RECORDS=20000
@@ -8,7 +8,7 @@ NUM_BATCHES=$((TOTAL_RECORDS / FRAC_LEN))
 for ((DATA_FRAC=0; DATA_FRAC < NUM_BATCHES; DATA_FRAC++))
 do   
     echo "Processing batch $DATA_FRAC of $NUM_BATCHEs..."
-    accelerate launch --num_processes 3 --main_process_port=2950 spin/generate.py --model "joyfine/zephyr-7b-sft-full-SPIN-iter3" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir generated/zephyr-7b-sft-full-again/iter0/train-raw-generated
+    accelerate launch --num_processes 5 --main_process_port=2950 SPIN/spin/generate.py --model "joyfine/zephyr-7b-sft-full-SPIN-iter3" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir generated/zephyr-7b-sft-full-again/iter0/train-raw-generated
 
 done
 echo "Train - All batches processed"
