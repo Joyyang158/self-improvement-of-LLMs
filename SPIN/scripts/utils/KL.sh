@@ -4,7 +4,7 @@ export CUDA_VISIBLE_DEVICES=4,5
 # conda activate evalenv
 # accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py
 # accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py --base_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter0 --spin_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter1 --base_input_file iter1.csv --spin_input_file iter2.csv --output_file iter1.csv
-accelerate launch --num_processes 2 --main_process_port=2950 SPIN/spin/KL.py --base_model /blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/trainable-noised-gpt-preference-0-outputs/iter1 --spin_model /blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/self-trainable-noise-gpt-preference-0-outputs/iter2-new/checkpoint-1667 --base_input_file iter2.csv --spin_input_file iter3.csv --output_file iter2.csv
+accelerate launch --num_processes 2 --main_process_port=2950 SPIN/spin/KL.py --base_model /blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/self-trainable-noise-gpt-preference-0-outputs/iter2-new/checkpoint-1667 --spin_model /blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/self-trainable-noise-gpt-preference-0-outputs/iter2 --base_input_file iter3.csv --spin_input_file iter4.csv --output_file iter3.csv
 
 #### zephyr ####
 # accelerate launch --num_processes 4 --main_process_port=2950 spin/KL.py --model /group-volume/haoyan/spin_results/zephyr-7b-sft-full/new_outputs/iter0-ckpt --input_dir generated/zephyr-7b-sft-full/iter0/synthetic --output_dir logprob_sum_pre/zephyr-7b-sft-full/vanilla --split train --data_type real
