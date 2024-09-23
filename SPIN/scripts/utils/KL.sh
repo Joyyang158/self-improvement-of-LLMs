@@ -4,7 +4,7 @@ export CUDA_VISIBLE_DEVICES=4,6,7
 # conda activate evalenv
 # accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py
 # accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py --base_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter0 --spin_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter1 --base_input_file iter1.csv --spin_input_file iter2.csv --output_file iter1.csv
-accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py --base_model joyfine/zephyr-7b-sft-full-SPIN-iter2 --spin_model joyfine/zephyr-7b-sft-full-SPIN-iter3 --base_input_file iter3.csv --spin_input_file iter4.csv --output_file iter3.csv
+accelerate launch --num_processes 3 --main_process_port=2950 SPIN/spin/KL.py --base_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter2 --spin_model joyfine/Llama-2-7b-ultrachat200k-SPIN-iter3 --base_input_file iter3.csv --spin_input_file iter4.csv --output_file iter3.csv
 
 #### zephyr ####
 # accelerate launch --num_processes 4 --main_process_port=2950 spin/KL.py --model /group-volume/haoyan/spin_results/zephyr-7b-sft-full/new_outputs/iter0-ckpt --input_dir generated/zephyr-7b-sft-full/iter0/synthetic --output_dir logprob_sum_pre/zephyr-7b-sft-full/vanilla --split train --data_type real
