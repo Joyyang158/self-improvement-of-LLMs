@@ -67,7 +67,7 @@ df_spin = pd.read_csv(f"{args.spin_input_dir}/{args.spin_input_file}")
 df_list = []
 
 for index, row in df.iterrows():
-    if row['G_Score'] <= row['R_Score']:
+    if row['G_Score'] < row['R_Score']:
         r_answer = r_answer = '' if pd.isna(row['R_Answer']) else row['R_Answer']
         g_answer = '' if pd.isna(row['G_Answer']) else row['G_Answer']
     else:
