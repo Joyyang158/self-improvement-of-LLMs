@@ -27,6 +27,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--base_model', type=str, default='/blue/yonghui.wu/sgao1/haoyan/models/base/Llama-2-7b-ultrachat200k')
 parser.add_argument('--spin_model', type=str, default='joyfine/Llama-2-7b-ultrachat200k-SPIN-iter0')
 parser.add_argument('--input_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-zephyr-7b-sft-full')
+parser.add_argument('--spin_input_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-zephyr-7b-sft-full')
 parser.add_argument('--base_input_file', type=str, default='iter0.csv')
 parser.add_argument('--spin_input_file', type=str, default='iter1.csv')
 parser.add_argument('--output_dir', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/final-KL-trainable-noise-zephyr-7b-sft-full')
@@ -59,14 +60,20 @@ tokenizer.pad_token = tokenizer.eos_token
 df_iter0 = pd.read_csv(f"/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-zephyr-7b-sft-full/iter0.csv")
 df = pd.read_csv(f"{args.input_dir}/{args.base_input_file}")
 df['R_Answer'] = df_iter0['R_Answer']
+df['R_Score'] = df_iter0['R_Score']
 
-df_spin = pd.read_csv(f"{args.input_dir}/{args.spin_input_file}")
+df_spin = pd.read_csv(f"{args.spin_input_dir}/{args.spin_input_file}")
 
 df_list = []
 
 for index, row in df.iterrows():
-    r_answer = '' if pd.isna(row['R_Answer']) else row['R_Answer']
-    g_answer = '' if pd.isna(row['G_Answer']) else row['G_Answer']
+    if row['G_Score'] <= row['R_Score']:
+        r_answer = r_answer = '' if pd.isna(row['R_Answer']) else row['R_Answer']
+        g_answer = '' if pd.isna(row['G_Answer']) else row['G_Answer']
+    else:
+        r_answer = r_answer = '' if pd.isna(row['G_Answer']) else row['G_Answer']
+        g_answer = '' if pd.isna(row['R_Answer']) else row['R_Answer']
+    
     spin_answer = '' if pd.isna(df_spin.iloc[index]['G_Answer']) else df_spin.iloc[index]['G_Answer']
     row_dict = {index: {'Question': row['Question'], 'R_Answer': r_answer, 'G_Answer': g_answer, "SPIN_Answer": spin_answer}}
     df_list.append(row_dict)
