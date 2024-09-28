@@ -3,11 +3,13 @@ import argparse
 import numpy as np
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--model_name', type=str, default='Llama-2-7b-ultrachat200k')
 parser.add_argument('--iteration', type=str, default='iter1')
+
 args = parser.parse_args()
 
-spin_file_path = "/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-zephyr-7b-sft-full"
-noise_file_path = "/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-zephyr-7b-sft-full"
+spin_file_path = f"/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-{args.model}"
+noise_file_path = f"/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-{args.model}"
 spin_data = pd.read_csv(f"{spin_file_path}/{args.iteration}.csv")
 noise_data = pd.read_csv(f"{noise_file_path}/{args.iteration}.csv")
 win_count, tie_count, lose_count = 0, 0 ,0
