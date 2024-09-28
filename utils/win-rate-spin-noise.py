@@ -8,8 +8,8 @@ parser.add_argument('--iteration', type=str, default='iter1')
 
 args = parser.parse_args()
 
-spin_file_path = f"/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-{args.model}"
-noise_file_path = f"/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-{args.model}"
+spin_file_path = f"/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-{args.model_name}"
+noise_file_path = f"/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-{args.model_name}"
 spin_data = pd.read_csv(f"{spin_file_path}/{args.iteration}.csv")
 noise_data = pd.read_csv(f"{noise_file_path}/{args.iteration}.csv")
 win_count, tie_count, lose_count = 0, 0 ,0
