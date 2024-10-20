@@ -1,5 +1,5 @@
 # Model arguments
-model_name_or_path: /blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/trainable-noised-gpt-preference-0-outputs/iter1
+model_name_or_path: /blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/trainable-noised-gpt-preference-0-outputs/iter2
 model_revision: main
 
 dataset_mixer:
@@ -9,9 +9,9 @@ dataset_splits:
 - test
 preprocessing_num_workers: 12
 
-# Trainer arguments
+# Trainer argument
 bf16: true
-beta: 0.1
+beta: 1
 do_eval: false
 evaluation_strategy: "no"
 eval_steps: 100
