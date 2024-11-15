@@ -2,12 +2,10 @@ import os
 from openai import OpenAI
 import pandas as pd
 import json
-import random
 from tqdm import tqdm
 # from together import Together
 import argparse
-import openai
-import time
+import anthropic
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter3/train.json')
@@ -16,9 +14,13 @@ parser.add_argument('--file_path', type=str, default='/blue/yonghui.wu/sgao1/hao
 args = parser.parse_args()
 
 
-GPT_API_KEY = os.environ["OPENAI_API_KEY"]
+# GPT_API_KEY = os.environ["OPENAI_API_KEY"]
+# client = OpenAI(api_key = GPT_API_KEY)
 
-client = OpenAI(api_key = GPT_API_KEY)
+
+Claude_API_KEY = os.environ["Claude_API_KEY"]
+client = anthropic.Anthropic()
+
 def gpt_inference(prompt, model):
     response = client.chat.completions.create(
         model = model,
@@ -32,6 +34,21 @@ def gpt_inference(prompt, model):
     output = response.choices[0].message.content
     return output
 
+
+def claude_inference(prompt, model):
+    response = client.chat.completions.create(
+        model = model,
+        messages = [
+            {'role': 'system', 'content': ''},
+            {'role': 'user', 'content': prompt}
+        ],
+        timeout=10
+    )
+    output = response.content[0].text
+    return output
+    
+
+
 prompt = """ You are tasked with evaluating the quality of the given answer based on the provided question. Your task is to assign a score between 0 and 100, where 0 indicates very poor quality, and 100 indicates excellent quality. You should use a 1-point increment scale, meaning the score can be any whole number between 0 and 100 (e.g. 73,91,68) and avoiding scores that are always multiples of 5. Consider factors such as relevance, clarity, accuracy, and completeness. Provide only the score without any explanation.
 
 Question: {question}
@@ -42,7 +59,8 @@ Score:
 """
 
 # model = 'meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo'
-model = 'gpt-4o-mini'
+# model = 'gpt-4o-mini'
+model = "claude-3-5-sonnet-20241022"
 data_file_path = args.data_file_path
 with open(data_file_path, 'r') as file:
     data = json.load(file)
