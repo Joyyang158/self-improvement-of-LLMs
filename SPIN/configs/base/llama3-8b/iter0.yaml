@@ -6,7 +6,6 @@ dataset_mixer:
   /blue/yonghui.wu/sgao1/haoyan/data/base-Llama-3-8B-Ultrachat-200K/iter0: 1.0
 dataset_splits:
 - train
-- test
 preprocessing_num_workers: 12
 
 # Trainer arguments
