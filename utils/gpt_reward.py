@@ -5,7 +5,7 @@ import json
 from tqdm import tqdm
 # from together import Together
 import argparse
-import anthropic
+# import anthropic
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter3/train.json')
@@ -14,12 +14,12 @@ parser.add_argument('--file_path', type=str, default='/blue/yonghui.wu/sgao1/hao
 args = parser.parse_args()
 
 
-# GPT_API_KEY = os.environ["OPENAI_API_KEY"]
-# client = OpenAI(api_key = GPT_API_KEY)
+GPT_API_KEY = os.environ["OPENAI_API_KEY"]
+client = OpenAI(api_key = GPT_API_KEY)
 
 
-Claude_API_KEY = os.environ["Claude_API_KEY"]
-client = anthropic.Anthropic()
+# Claude_API_KEY = os.environ["Claude_API_KEY"]
+# client = anthropic.Anthropic()
 
 def gpt_inference(prompt, model):
     response = client.chat.completions.create(
@@ -59,8 +59,8 @@ Score:
 """
 
 # model = 'meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo'
-# model = 'gpt-4o-mini'
-model = "claude-3-5-sonnet-20241022"
+model = 'gpt-4o-mini'
+# model = "claude-3-5-sonnet-20241022"
 data_file_path = args.data_file_path
 with open(data_file_path, 'r') as file:
     data = json.load(file)

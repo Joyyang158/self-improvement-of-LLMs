@@ -44,8 +44,8 @@ for i in range(num_fracs):
 
 print(len(test_data))
 
-if not os.path.exists(f'{input_dir}/synthetic'):
-    os.makedirs(f'{input_dir}/synthetic')
+# if not os.path.exists(f'{input_dir}/synthetic'):
+#     os.makedirs(f'{input_dir}/synthetic')
 
 with open(f'{input_dir}/train.json', 'w') as f:
     json.dump(data, f, indent=4)
