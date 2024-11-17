@@ -3,9 +3,10 @@ model_name_or_path: /blue/yonghui.wu/sgao1/haoyan/models/base/Llama-3-8B-Ultrach
 model_revision: main
 
 dataset_mixer:
-  /blue/yonghui.wu/sgao1/haoyan/data/base-Llama-3-8B-Ultrachat-200K/iter0: 1.0
+  /blue/yonghui.wu/sgao1/haoyan/data/base-Llama-3-8B-Ultrachat-200K/iter0/synthetic: 1.0
 dataset_splits:
 - train
+- test
 preprocessing_num_workers: 12
 
 # Trainer arguments
