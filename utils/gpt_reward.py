@@ -8,8 +8,8 @@ import argparse
 # import anthropic
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/trainable-noise-zephyr-7b-sft-full/iter3/train.json')
-parser.add_argument('--file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-trainable-noise-zephyr-7b-sft-full')
+parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/base-Llama-3-8B-Ultrachat-200K/iter0/synthetic/train.json')
+parser.add_argument('--file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-Llama-3-8B-Ultrachat-200K')
 
 args = parser.parse_args()
 
@@ -73,7 +73,7 @@ file_path = args.file_path
 if not os.path.exists(file_path):
     os.makedirs(file_path)
 
-csv_file = f'{file_path}/{data_file_path.split("/")[-2]}.csv'
+csv_file = f'{file_path}/{data_file_path.split("/")[-3]}.csv'
 print(csv_file)
 
 # if file_path.split("/")[1] == "iter0_synthetic":
@@ -88,7 +88,7 @@ file_exists = os.path.isfile(csv_file)
 
 
 save_batch_size = 500
-if data_file_path.split("/")[-2] == "iter0":
+if data_file_path.split("/")[-3] == "iter0":
     count = 0
     total_data = []
     for each_sample in tqdm(data):
