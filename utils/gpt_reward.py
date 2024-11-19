@@ -8,7 +8,7 @@ import argparse
 # import anthropic
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/base-Llama-3-8B-Ultrachat-200K/iter0/synthetic/train.json')
+parser.add_argument('--data_file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/base-Llama-3-8B-Ultrachat-200K/iter1/synthetic/train.json')
 parser.add_argument('--file_path', type=str, default='/blue/yonghui.wu/sgao1/haoyan/data/gpt-score-Llama-3-8B-Ultrachat-200K')
 
 args = parser.parse_args()
