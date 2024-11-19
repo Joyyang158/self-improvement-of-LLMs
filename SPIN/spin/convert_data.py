@@ -44,16 +44,16 @@ for i in range(num_fracs):
 
 print(len(test_data))
 
-# if not os.path.exists(f'{input_dir}/synthetic'):
-#     os.makedirs(f'{input_dir}/synthetic')
+if not os.path.exists(f'{input_dir}/synthetic'):
+    os.makedirs(f'{input_dir}/synthetic')
 
-with open(f'{input_dir}/train.json', 'w') as f:
+with open(f'{input_dir}/synthetic/train.json', 'w') as f:
     json.dump(data, f, indent=4)
-with open(f'{input_dir}/test.json', 'w') as f:
+with open(f'{input_dir}/synthetic/test.json', 'w') as f:
     json.dump(test_data, f, indent=4)
 
-dataset = load_dataset('json', data_files=f'{input_dir}/train.json',split='train')
-dataset_test = load_dataset('json', data_files=f'{input_dir}/test.json',split='train')
+dataset = load_dataset('json', data_files=f'{input_dir}/synthetic/train.json',split='train')
+dataset_test = load_dataset('json', data_files=f'{input_dir}/synthetic/test.json',split='train')
 
 
 
