@@ -6,7 +6,7 @@ import shutil
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_name', type=str, default='zephyr-7b-sft-full')
+parser.add_argument('--model_name', type=str, default='Llama-3-8B-Ultrachat-200K')
 parser.add_argument('--dataset_real_file_name', type=str, default = "iter0.csv")
 parser.add_argument('--dataset_generated_file_name', type=str, default = "iter1.csv")
 parser.add_argument('--threshold', type=int, default = 0)
@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 base_path = f"/blue/yonghui.wu/sgao1/haoyan"
 df_real = pd.read_csv(f"{base_path}/data/gpt-score-{args.model_name}/{args.dataset_real_file_name}")
-df_generated = pd.read_csv(f"{base_path}/data/gpt-score-trainable-noise-{args.model_name}/{args.dataset_generated_file_name}")
+df_generated = pd.read_csv(f"{base_path}/data/gpt-score-{args.model_name}/{args.dataset_generated_file_name}")
 
 data = []
 count_r = 0
@@ -41,7 +41,7 @@ if not os.path.exists(output_dir):
 with open(f'{output_dir}/train.json', 'w') as f:
     json.dump(data, f, indent=4)
 
-src_path = f"{base_path}/data/trainable-noise-{args.model_name}/{iter_n}/test.json"
+src_path = f"{base_path}/data/base-{args.model_name}/{iter_n}/synthetic/test.json"
 dst_path = f"{output_dir}/test.json"
 shutil.copy(src_path, dst_path)
 
