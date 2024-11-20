@@ -3,7 +3,7 @@
 # conda activate spinenv
 
 
-export CUDA_VISIBLE_DEVICES="3,4,5,6,7"
+export CUDA_VISIBLE_DEVICES="0,1,2,4,5,6,7"
 
 
 # Set the home directory for Hugging Face transformers library cache.
@@ -28,4 +28,4 @@ ACCELERATE_LOG_LEVEL=info
 # alignment-handbook/zephyr-7b-sft-full
 
 
-nohup accelerate launch --config_file SPIN/configs/deepspeed_zero3.yaml --num_processes=5 --main_process_port 2950 SPIN/spin/run_spin.py SPIN/configs/self-trainable-noise/llama3-8b/iter1.yaml --num_train_epochs=2 --output_dir="/blue/yonghui.wu/sgao1/haoyan/spin-results/Llama-3-8B-Ultrachat-200K/self-trainable-noise-gpt-preference-0-outputs/iter1" > self_job_output_noise_iter1.log 2>&1 &
+nohup accelerate launch --config_file SPIN/configs/deepspeed_zero3.yaml --num_processes=7 --main_process_port 2950 SPIN/spin/run_spin.py SPIN/configs/self-trainable-noise/llama3-8b/iter1.yaml --num_train_epochs=2 --output_dir="/blue/yonghui.wu/sgao1/haoyan/spin-results/Llama-3-8B-Ultrachat-200K/self-trainable-noise-gpt-preference-0-outputs/iter1" > self_job_output_noise_iter1.log 2>&1 &

@@ -1,4 +1,4 @@
-export CUDA_VISIBLE_DEVICES=0,2,3,4,5,6,7
+export CUDA_VISIBLE_DEVICES=0,4,6,7
 
 FRAC_LEN=800
 TOTAL_RECORDS=50000
@@ -8,7 +8,7 @@ NUM_BATCHES=$((TOTAL_RECORDS / FRAC_LEN))
 for ((DATA_FRAC=0; DATA_FRAC < NUM_BATCHES; DATA_FRAC++))
 do   
     echo "Processing batch $DATA_FRAC of $NUM_BATCHEs..."
-    accelerate launch --num_processes 7 --main_process_port=2950 SPIN/spin/generate.py --model "/blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir /blue/yonghui.wu/sgao1/haoyan/data/base-zephyr-7b-sft-full-50k/iter0/train-raw-generated
+    accelerate launch --num_processes 4 --main_process_port=2950 SPIN/spin/generate.py --model "/blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --output_dir /blue/yonghui.wu/sgao1/haoyan/data/base-zephyr-7b-sft-full-50k/iter0/train-raw-generated
 
 done
 echo "Train - All batches processed"
@@ -17,7 +17,7 @@ echo "Train - All batches processed"
 for ((DATA_FRAC=0; DATA_FRAC < NUM_BATCHES; DATA_FRAC++))
 do 
     echo "Processing batch $DATA_FRAC of $NUM_BATCHEs..."
-    accelerate launch --num_processes 7 --main_process_port=2950 SPIN/spin/generate.py --model "/blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --split test --output_dir /blue/yonghui.wu/sgao1/haoyan/data/base-zephyr-7b-sft-full-50k/iter0/test-raw-generated
+    accelerate launch --num_processes 4 --main_process_port=2950 SPIN/spin/generate.py --model "/blue/yonghui.wu/sgao1/haoyan/models/base/zephyr-7b-sft-full" --batch_size 8 --frac_len $FRAC_LEN --data_frac $DATA_FRAC --split test --output_dir /blue/yonghui.wu/sgao1/haoyan/data/base-zephyr-7b-sft-full-50k/iter0/test-raw-generated
 
 done
 echo "Test - All batches processed"
