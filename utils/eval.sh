@@ -1,7 +1,7 @@
-export CUDA_VISIBLE_DEVICES="0,1,2,3,4,6,7"
+export CUDA_VISIBLE_DEVICES="0,1,3,4"
 
 # model="/blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/gpt-preference-10-outputs/iter0"
-model="/blue/yonghui.wu/sgao1/haoyan/spin-results/Llama-3-8B-Ultrachat-200K/self-trainable-noise-gpt-preference-0-outputs/iter1/checkpoint-357"
+model="/blue/yonghui.wu/sgao1/haoyan/spin-results/zephyr-7b-sft-full/trainable-noised-gpt-preference-0-outputs/iter1"
 
 
 accelerate launch /home/sgao1/haoyan/lm-evaluation-harness/lm_eval --model hf --model_args pretrained=$model,dtype='bfloat16' --tasks arc_easy,arc_challenge --device cuda --batch_size 8 --num_fewshot 25
